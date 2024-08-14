@@ -1,5 +1,5 @@
 
-import 'package:biswas_shopping_bd/utils/app-constant.dart';
+import '/utils/app-constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';

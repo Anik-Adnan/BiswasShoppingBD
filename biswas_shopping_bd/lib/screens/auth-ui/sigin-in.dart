@@ -101,10 +101,10 @@ class _SignInScreenState extends State<SignInScreen>{
                 child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text("Don't have an account?" ,style: TextStyle(color: Colors.black,fontSize: 18.0),),
+                      const Text("Don't have an account?" ,style: TextStyle(color: Colors.black,fontSize: 18.0),),
                       GestureDetector(
-                        onTap: () => Get.offAll( ()=> SignUpScreen()),
-                          child: Text(" SignUp",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18.0),),
+                        onTap: () => Get.offAll( ()=> const SignUpScreen()),
+                          child: const Text(" SignUp",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18.0),),
                       ),
                     ],
                 ),

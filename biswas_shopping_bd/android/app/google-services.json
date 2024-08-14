@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "679771843332",
+    "project_id": "biswasshoppingbd-5c83b",
+    "storage_bucket": "biswasshoppingbd-5c83b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:679771843332:android:d45e8b5eb9670006bc7e51",
+        "android_client_info": {
+          "package_name": "com.Biswas.BiswasShoppingBD"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAiWpYU2qvdxf1JQ8ZSjXs8n3PSTlilOH8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

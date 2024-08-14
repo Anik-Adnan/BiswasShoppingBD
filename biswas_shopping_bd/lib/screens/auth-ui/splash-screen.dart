@@ -1,7 +1,7 @@
 
 import 'dart:async';
 
-import 'package:biswas_shopping_bd/screens/user-panel/main-screen.dart';
+import 'package:biswas_shopping_bd/screens/auth-ui/welcome-screen.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen>{
   void initState() {
     super.initState();
       Timer(Duration( seconds: 3),(){
-        Get.offAll(()=> MainScreen());
+        Get.offAll(()=> WelcomeScreen());
       });
     }
 

@@ -161,10 +161,10 @@ class _SignUpScreenState extends State<SignUpScreen>{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Text("Already have an account?" ,style: TextStyle(color: Colors.black,fontSize: 18.0),),
+                    const Text("Already have an account?" ,style: TextStyle(color: Colors.black,fontSize: 18.0),),
                     GestureDetector(
-                      onTap: () => Get.offAll( ()=> SignInScreen()),
-                        child: Text(" SignIn",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18.0),),
+                      onTap: () => Get.offAll( ()=> const SignInScreen()),
+                        child: const Text(" SignIn",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18.0),),
                     ),
                   ],
                 ),

@@ -1,8 +1,8 @@
 
 import 'dart:async';
 
-import 'package:biswas_shopping_bd/screens/auth-ui/welcome-screen.dart';
-import 'package:biswas_shopping_bd/utils/app-constant.dart';
+import '/screens/auth-ui/welcome-screen.dart';
+import '/utils/app-constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
@@ -18,8 +18,8 @@ class _SplashScreenState extends State<SplashScreen>{
   @override
   void initState() {
     super.initState();
-      Timer(Duration( seconds: 3),(){
-        Get.offAll(()=> WelcomeScreen());
+      Timer(const Duration( seconds: 3),(){
+        Get.offAll(()=> const WelcomeScreen());
       });
     }
 

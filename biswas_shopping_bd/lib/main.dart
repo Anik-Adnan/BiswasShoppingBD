@@ -1,4 +1,3 @@
-import 'package:biswas_shopping_bd/screens/auth-ui/sigin-in.dart';
 
 import 'screens/auth-ui/splash-screen.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const SignInScreen(),
+      home: const SplashScreen(),
     );
   }
 }

@@ -1,4 +1,6 @@
 
+import 'package:biswas_shopping_bd/screens/auth-ui/sigin-in.dart';
+
 import '/utils/app-constant.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,7 +70,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>{
                   color: Colors.white,
                   size: Get.width/12,),
                   label: const Text("Sign In with Mail",style: TextStyle(color: Colors.black),),
-                  onPressed: (){},
+                  onPressed: (){
+                    Get.to(SignInScreen());
+                  },
                 ),
               ),
             ),

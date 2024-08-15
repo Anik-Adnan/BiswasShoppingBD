@@ -1,6 +1,7 @@
 
 import 'package:biswas_shopping_bd/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import 'screens/auth-ui/splash-screen.dart';
 import 'package:flutter/material.dart';
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
+      builder: EasyLoading.init(),
     );
   }
 }

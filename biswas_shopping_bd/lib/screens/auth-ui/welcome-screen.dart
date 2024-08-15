@@ -1,4 +1,5 @@
 
+import 'package:biswas_shopping_bd/controllers/google-sign-in-controller.dart';
 import 'package:biswas_shopping_bd/screens/auth-ui/sigin-in.dart';
 
 import '/utils/app-constant.dart';
@@ -6,14 +7,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
 
-class WelcomeScreen extends StatefulWidget{
-  const WelcomeScreen({super.key});
+class WelcomeScreen extends StatelessWidget{
+  WelcomeScreen({super.key});
 
-  @override
-  State<WelcomeScreen> createState() => _WelcomeScreenState();
-}
+  final GoogleSignInController _googleSignInController =  Get.put(GoogleSignInController());
 
-class _WelcomeScreenState extends State<WelcomeScreen>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,7 +48,9 @@ class _WelcomeScreenState extends State<WelcomeScreen>{
                     height: Get.height/12,
                     width: Get.width /12,),
                   label: const Text("Sign In with google",style: TextStyle(color: Colors.black),),
-                  onPressed: (){},
+                  onPressed: (){
+                    _googleSignInController.signInWithGoogle();
+                  },
                 ),
               ),
             ),

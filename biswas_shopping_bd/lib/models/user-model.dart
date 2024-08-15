@@ -10,8 +10,8 @@ class UserModel{
   final String country;
   final String userAddress;
   final String street;
-  final Bool isAdmin;
-  final Bool isActive;
+  final bool isAdmin;
+  final bool isActive;
   final dynamic createdOn;
 
   UserModel({

@@ -12,7 +12,20 @@
           "package_name": "com.Biswas.BiswasShoppingBD"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "679771843332-sgbk3lv4lqdkhnsaqqfpj4td43ssm8s2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.Biswas.BiswasShoppingBD",
+            "certificate_hash": "eccc095ff36dac195fefc7470e8a12d13e679556"
+          }
+        },
+        {
+          "client_id": "679771843332-74ov3hq0lj522e93ku0ilouuhee92a4i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAiWpYU2qvdxf1JQ8ZSjXs8n3PSTlilOH8"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "679771843332-74ov3hq0lj522e93ku0ilouuhee92a4i.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "679771843332-r0t414rnvkendn4oicjitimirboejvav.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.biswasShoppingBd"
+              }
+            }
+          ]
         }
       }
     }

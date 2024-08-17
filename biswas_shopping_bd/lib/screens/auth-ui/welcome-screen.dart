@@ -1,6 +1,6 @@
 
 import 'package:biswas_shopping_bd/controllers/google-sign-in-controller.dart';
-import 'package:biswas_shopping_bd/screens/auth-ui/sigin-in.dart';
+import 'package:biswas_shopping_bd/screens/auth-ui/sigin-in-screen.dart';
 
 import '/utils/app-constant.dart';
 import 'package:flutter/material.dart';

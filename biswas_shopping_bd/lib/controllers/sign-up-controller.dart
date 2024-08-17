@@ -58,7 +58,6 @@ class SignUpController extends GetxController{
 
     }on FirebaseException catch(e){
       EasyLoading.dismiss();
-      print("$e");
       Get.snackbar("Error", "$e",
       snackPosition: SnackPosition.BOTTOM,
       backgroundColor: AppConstant.appSecondaryColor,

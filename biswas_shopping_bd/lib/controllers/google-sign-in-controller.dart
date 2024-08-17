@@ -33,6 +33,7 @@ class GoogleSignInController extends GetxController{
               phone: user.phoneNumber.toString(),
               userImg: user.photoURL.toString(),
               userDeviceToken: '',
+              userCity: '',
               country: '',
               userAddress: '',
               street: '', isAdmin: false,

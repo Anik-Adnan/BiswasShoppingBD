@@ -71,7 +71,7 @@ class WelcomeScreen extends StatelessWidget{
                   size: Get.width/12,),
                   label: const Text("Sign In with Mail",style: TextStyle(color: Colors.black),),
                   onPressed: (){
-                    Get.to(SignInScreen());
+                    Get.to(()=> SignInScreen());
                   },
                 ),
               ),

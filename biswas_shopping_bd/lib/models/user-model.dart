@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 class UserModel{
   final String uId;
@@ -7,6 +6,7 @@ class UserModel{
   final String phone;
   final String userImg;
   final String userDeviceToken;
+  final String userCity;
   final String country;
   final String userAddress;
   final String street;
@@ -21,6 +21,7 @@ class UserModel{
     required this.phone,
     required this.userImg,
     required this.userDeviceToken,
+    required this.userCity,
     required this.country,
     required this.userAddress,
     required this.street,
@@ -38,6 +39,7 @@ class UserModel{
       'phone': phone,
       'userImg': userImg,
       'userDeviceToken': userDeviceToken,
+      'city': userCity,
       'country': country,
       'userAddress': userAddress,
       'street':street,
@@ -55,6 +57,7 @@ class UserModel{
       phone: json['phone'],
       userImg: json['userImg'],
       userDeviceToken: json['userDeviceToken'],
+      userCity: json['userCity'],
       country: json['country'],
       userAddress: json['userAddress'],
       street: json['street'],

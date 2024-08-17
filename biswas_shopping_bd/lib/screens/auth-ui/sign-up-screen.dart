@@ -1,4 +1,8 @@
 
+import 'package:biswas_shopping_bd/controllers/google-sign-in-controller.dart';
+import 'package:biswas_shopping_bd/controllers/sign-up-controller.dart';
+import 'package:get/get.dart';
+
 import '/screens/auth-ui/sigin-in.dart';
 
 import '/utils/app-constant.dart';
@@ -14,6 +18,14 @@ class SignUpScreen extends StatefulWidget{
 
 }
 class _SignUpScreenState extends State<SignUpScreen>{
+
+  final SignUpController signUpController = Get.put(SignUpController());
+  TextEditingController userName = TextEditingController();
+  TextEditingController userPhoneNumber = TextEditingController();
+  TextEditingController userCity = TextEditingController();
+  TextEditingController userEmail = TextEditingController();
+  TextEditingController userPassword = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return KeyboardVisibilityBuilder(
@@ -42,6 +54,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    controller: userName,
                     cursorColor: AppConstant.appSecondaryColor,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
@@ -61,6 +74,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    controller: userPhoneNumber,
                     cursorColor: AppConstant.appSecondaryColor,
                     keyboardType: TextInputType.phone,
                     decoration: InputDecoration(
@@ -80,6 +94,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    controller: userCity,
                     cursorColor: AppConstant.appSecondaryColor,
                     keyboardType: TextInputType.streetAddress,
                     decoration: InputDecoration(
@@ -99,6 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    controller: userEmail,
                     cursorColor: AppConstant.appSecondaryColor,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
@@ -119,8 +135,10 @@ class _SignUpScreenState extends State<SignUpScreen>{
                 child: Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: TextFormField(
+                    controller: userPassword,
                     cursorColor: AppConstant.appSecondaryColor,
                     keyboardType: TextInputType.visiblePassword,
+                    obscureText: true,
                     decoration: InputDecoration(
                         hintText: 'Password',
                         prefixIcon: const Icon(Icons.password),

@@ -21,7 +21,7 @@ class SignUpController extends GetxController{
       String userCity,
       String userPassword,
       String userDeviceToken,
-      ) async{
+      )async{
 
     EasyLoading.show(status: "Please wait");
     try{

@@ -3,7 +3,7 @@ import 'package:biswas_shopping_bd/controllers/sign-up-controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 
-import '/screens/auth-ui/sigin-in.dart';
+import '/screens/auth-ui/sigin-in-screen.dart';
 
 import '/utils/app-constant.dart';
 import 'package:flutter/material.dart';
@@ -194,17 +194,13 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           String deviceToken = '';
 
                           if(name.isEmpty || mail.isEmpty || city.isEmpty || password.isEmpty || phone.isEmpty){
-                            Get.snackbar("Error", "Please enter all details");
+                            Get.snackbar("Error", "Please enter all details.");
                           }
                           else{
                             UserCredential? userCredential = await signUpController.signUpMethod(name, mail, phone, city, password, deviceToken);
 
                             if(userCredential != null){
-                              Get.snackbar("Verification email sent .", "Please check your email.",
-                              snackPosition: SnackPosition.BOTTOM,
-                              backgroundColor: AppConstant.appSecondaryColor,
-                              colorText: AppConstant.apptextColor
-                              );
+                              Get.snackbar("Verification email sent .", "Please check your email.");
                               FirebaseAuth.instance.signOut();
                               Get.offAll(()=> SignInScreen());
                             }

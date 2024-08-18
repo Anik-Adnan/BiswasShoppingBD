@@ -154,7 +154,7 @@ class _SignInScreenState extends State<SignInScreen>{
                         children: [
                           const Text("Don't have an account?" ,style: TextStyle(color: Colors.black,fontSize: 18.0),),
                           GestureDetector(
-                            onTap: () => Get.offAll( ()=> const SignUpScreen()),
+                            onTap: () => Get.to( ()=> const SignUpScreen()),
                               child: const Text(" SignUp",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold,fontSize: 18.0),),
                           ),
                         ],

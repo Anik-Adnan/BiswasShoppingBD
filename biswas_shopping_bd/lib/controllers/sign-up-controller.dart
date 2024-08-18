@@ -23,8 +23,8 @@ class SignUpController extends GetxController{
       String userDeviceToken,
       )async{
 
-    EasyLoading.show(status: "Please wait");
     try{
+      EasyLoading.show(status: "Please wait");
       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
           email: userEmail, password: userPassword);
       // send mail verification

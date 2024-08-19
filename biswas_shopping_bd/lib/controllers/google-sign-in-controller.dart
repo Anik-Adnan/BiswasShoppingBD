@@ -1,3 +1,4 @@
+import 'package:biswas_shopping_bd/controllers/get-device-token-controller.dart';
 import 'package:biswas_shopping_bd/models/user-model.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/main-screen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -11,6 +12,7 @@ class GoogleSignInController extends GetxController{
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   Future<void> signInWithGoogle() async{
+    final GetDeviceTokenController getDeviceTokenController = Get.put(GetDeviceTokenController());
     try{
       final GoogleSignInAccount? googleSignInAccount= await googleSignIn.signIn();
 
@@ -32,7 +34,7 @@ class GoogleSignInController extends GetxController{
               email: user.email.toString(),
               phone: user.phoneNumber.toString(),
               userImg: user.photoURL.toString(),
-              userDeviceToken: '',
+              userDeviceToken: getDeviceTokenController.deviceToken.toString(),
               userCity: '',
               country: '',
               userAddress: '',

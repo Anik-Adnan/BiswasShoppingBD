@@ -1,4 +1,5 @@
 
+import 'package:biswas_shopping_bd/controllers/get-device-token-controller.dart';
 import 'package:biswas_shopping_bd/controllers/sign-up-controller.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ class SignUpScreen extends StatefulWidget{
 class _SignUpScreenState extends State<SignUpScreen>{
 
   final SignUpController signUpController = Get.put(SignUpController());
+  final GetDeviceTokenController getDeviceTokenController = Get.put(GetDeviceTokenController());
   TextEditingController userName = TextEditingController();
   TextEditingController userPhoneNumber = TextEditingController();
   TextEditingController userCity = TextEditingController();
@@ -191,7 +193,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
                           String city = userCity.text.trim();
                           String mail = userEmail.text.trim();
                           String password = userPassword.text.trim();
-                          String deviceToken = '';
+                          String deviceToken = getDeviceTokenController.deviceToken.toString();
 
                           if(name.isEmpty || mail.isEmpty || city.isEmpty || password.isEmpty || phone.isEmpty){
                             Get.snackbar("Error", "Please enter all details.");

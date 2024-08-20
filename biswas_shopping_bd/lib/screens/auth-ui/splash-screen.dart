@@ -1,6 +1,11 @@
 
 import 'dart:async';
 
+import 'package:biswas_shopping_bd/controllers/get-user-data-controller.dart';
+import 'package:biswas_shopping_bd/screens/admin-panel/admin-main-screen.dart';
+import 'package:biswas_shopping_bd/screens/user-panel/main-screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 import '/screens/auth-ui/welcome-screen.dart';
 import '/utils/app-constant.dart';
 import 'package:flutter/material.dart';
@@ -15,12 +20,29 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen>{
+  User? user = FirebaseAuth.instance.currentUser;
+
+
   @override
   void initState() {
     super.initState();
       Timer(const Duration( seconds: 3),(){
-        Get.offAll(()=>  WelcomeScreen());
+        islogedIn(context);
       });
+    }
+
+    Future<void> islogedIn(BuildContext context) async {
+      if(user != null){
+        final GetUserDataController getUserDataController= Get.put(GetUserDataController());
+        var userDate =await  getUserDataController.getUserData(user!.uid);
+        if(userDate[0]['isAdmin'] == true){
+          Get.offAll(()=> AdminMainScreen());
+        }else{
+          Get.offAll(()=>MainScreen());
+        }
+      }else{
+        Get.to(()=> WelcomeScreen());
+      }
     }
 
   @override

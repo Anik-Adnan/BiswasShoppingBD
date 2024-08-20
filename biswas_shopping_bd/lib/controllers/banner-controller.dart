@@ -15,9 +15,9 @@ class BannerController extends GetxController{
     try{
       QuerySnapshot bannersSnapshot = await FirebaseFirestore.instance.collection('banners').get();
 
-      if(bannersSnapshot.docs.isEmpty){
+      if(bannersSnapshot.docs.isNotEmpty){
         bannersUrls.value = bannersSnapshot.docs
-            .map((doc) => doc['pant'] as String).toList();
+            .map((doc) => doc['imgUrl'] as String).toList();
       }
     }catch(e){
       print("$e");

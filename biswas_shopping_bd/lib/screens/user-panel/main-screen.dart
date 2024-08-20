@@ -1,4 +1,5 @@
 
+import 'package:biswas_shopping_bd/widgets/banner-widget.dart';
 import 'package:get/get.dart';
 
 import '/utils/app-constant.dart';
@@ -23,8 +24,10 @@ class MainScreen extends StatelessWidget{
           child: Column(
             children: [
               SizedBox(
-                height: Get.height/95.0,
+                height: 10.0,
+                child: Text('hi'),
               ),
+              BannerWidget(),
 
 
             ],

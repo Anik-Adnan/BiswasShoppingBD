@@ -1,4 +1,7 @@
 
+import 'package:biswas_shopping_bd/widgets/banner-widget.dart';
+import 'package:get/get.dart';
+
 import '/utils/app-constant.dart';
 import '/widgets/drawer-widget.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +18,22 @@ class MainScreen extends StatelessWidget{
         centerTitle: true,
       ),
       drawer: const DrawerWidget(),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 10.0,
+                child: Text('hi'),
+              ),
+              BannerWidget(),
+
+
+            ],
+          ),
+        ),
+      ),
 
     );
   }

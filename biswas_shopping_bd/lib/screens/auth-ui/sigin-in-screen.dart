@@ -1,5 +1,7 @@
 
+import 'package:biswas_shopping_bd/controllers/get-user-data-controller.dart';
 import 'package:biswas_shopping_bd/controllers/sign-in-controller.dart';
+import 'package:biswas_shopping_bd/screens/admin-panel/admin-main-screen.dart';
 import 'package:biswas_shopping_bd/screens/auth-ui/forget-password-screen.dart';
 import 'package:biswas_shopping_bd/screens/auth-ui/sign-up-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/main-screen.dart';
@@ -22,6 +24,8 @@ class _SignInScreenState extends State<SignInScreen>{
   final SignInController signInController = Get.put(SignInController());
   TextEditingController userEmail = TextEditingController();
   TextEditingController userPassword = TextEditingController();
+  final GetUserDataController getUserDataController = Get.put(GetUserDataController());
+
 
   @override
   Widget build(BuildContext context) {
@@ -130,11 +134,22 @@ class _SignInScreenState extends State<SignInScreen>{
                             Get.snackbar("SignIn Failed", "Enter correct email and password.");
                           }else{
                             UserCredential? userCredential = await signInController.signInMethod(email, password);
+
+                            var userData = await getUserDataController.getUserData(userCredential!.user!.uid);
+
                             if(userCredential != null){
                               if(userCredential.user!.emailVerified){
-                                Get.snackbar("Log In successfully ", "Welcome to BiswasShoppingBD." );
-                                Get.offAll(()=> const MainScreen());
+                                if(userData[0]['isAdmin'] == true){
+                                  Get.offAll(()=> AdminMainScreen());
+                                  Get.snackbar("Admin LogIn successfully ", "Dear Admin welcome" );
 
+                                }else{
+                                  var displayName = await userCredential!.user!.displayName;
+                                  var userName = await userData[0]['userName'];
+                                  Get.offAll(()=> MainScreen());
+                                  Get.snackbar("LogIn successfully ", "Dear $userName welcome to BiswasShoppingBD" );
+
+                                }
                               }else{
                                 Get.snackbar("SignIn Failded", "Please verify your email");
                               }

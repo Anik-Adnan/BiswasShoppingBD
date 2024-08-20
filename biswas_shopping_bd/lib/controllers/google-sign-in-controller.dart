@@ -48,6 +48,9 @@ class GoogleSignInController extends GetxController{
 
           EasyLoading.dismiss();
           Get.offAll(() => const MainScreen());
+          var uName= user.displayName.toString();
+          Get.snackbar("LogIn successfully ", "Dear $uName welcome to BiswasShoppingBD" );
+
         }
       }
     }catch(e){

@@ -1,4 +1,6 @@
 
+import 'package:get/get.dart';
+
 import '/utils/app-constant.dart';
 import '/widgets/drawer-widget.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +17,20 @@ class MainScreen extends StatelessWidget{
         centerTitle: true,
       ),
       drawer: const DrawerWidget(),
+      body: SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
+        child: Container(
+          child: Column(
+            children: [
+              SizedBox(
+                height: Get.height/95.0,
+              ),
+
+
+            ],
+          ),
+        ),
+      ),
 
     );
   }

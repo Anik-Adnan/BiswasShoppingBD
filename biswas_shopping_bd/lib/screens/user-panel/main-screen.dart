@@ -1,5 +1,8 @@
 
-import 'package:biswas_shopping_bd/widgets/banner-widget.dart';
+import 'package:biswas_shopping_bd/widgets/categories-widget.dart';
+
+import '/widgets/banner-widget.dart';
+import '/widgets/heading-widget.dart';
 import 'package:get/get.dart';
 
 import '/utils/app-constant.dart';
@@ -27,6 +30,15 @@ class MainScreen extends StatelessWidget{
                 height: Get.height/95.0
               ),
               BannerWidget(),
+              HeadingWidget(
+                headingTitle: "Categories",
+                headingSubTitle: "According to your budget",
+                onTap: (){},
+                buttonText: "see more",
+              ),
+
+              CategoriesWidget(),
+
 
 
             ],

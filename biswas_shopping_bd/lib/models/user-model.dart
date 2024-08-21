@@ -14,7 +14,7 @@ class UserModel{
   final bool isActive;
   final dynamic createdOn;
 
-  UserModel({
+   UserModel({
     required this.uId,
     required this.userName,
     required this.email,

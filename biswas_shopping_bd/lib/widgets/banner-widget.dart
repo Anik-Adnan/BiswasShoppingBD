@@ -20,11 +20,11 @@ class _BannerWidgetState extends State<BannerWidget>{
     return Container(
       child: Obx((){
         return CarouselSlider(
-          items: _bannerController.bannersUrls.map((imgUrl)=>
+          items: _bannerController.bannersUrls.map((imgUrls)=>
             ClipRRect(
               borderRadius: BorderRadius.circular(10.0),
               child: CachedNetworkImage(
-                imageUrl: imgUrl,
+                imageUrl: imgUrls,
                 fit: BoxFit.cover,
                 width: Get.width-10.0,
               placeholder: (context,url)=>
@@ -41,6 +41,7 @@ class _BannerWidgetState extends State<BannerWidget>{
           aspectRatio: 2.5,
           scrollDirection: Axis.horizontal,
           viewportFraction: 1,
+            height: 200,
         ),
         );
       }),

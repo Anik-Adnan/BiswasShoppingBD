@@ -24,8 +24,7 @@ class MainScreen extends StatelessWidget{
           child: Column(
             children: [
               SizedBox(
-                height: 10.0,
-                child: Text('hi'),
+                height: Get.height/95.0
               ),
               BannerWidget(),
 

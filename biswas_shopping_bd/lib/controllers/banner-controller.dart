@@ -6,7 +6,7 @@ class BannerController extends GetxController{
   RxList<String> bannersUrls = RxList<String>([]);
 
   @override
-  void OnInit(){
+  void onInit(){
     super.onInit();
     fetchBannersUrls();
   }

@@ -1,4 +1,6 @@
 
+import 'package:biswas_shopping_bd/widgets/categories-widget.dart';
+
 import '/widgets/banner-widget.dart';
 import '/widgets/heading-widget.dart';
 import 'package:get/get.dart';
@@ -35,12 +37,7 @@ class MainScreen extends StatelessWidget{
                 buttonText: "see more",
               ),
 
-              HeadingWidget(
-                headingTitle: "Flash Sale",
-                headingSubTitle: "According to your budget",
-                onTap: (){},
-                buttonText: "see more",
-              ),
+              CategoriesWidget(),
 
 
 

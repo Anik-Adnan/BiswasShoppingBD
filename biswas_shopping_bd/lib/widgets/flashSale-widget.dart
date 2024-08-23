@@ -4,6 +4,7 @@ import 'package:biswas_shopping_bd/models/product-model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
 import '../screens/user-panel/all-single-category-products-screen.dart';
@@ -81,27 +82,24 @@ class FlashSaleWidget extends StatelessWidget {
                                 style: TextStyle(fontSize: 12.0),
                               ),
                             ),
-                            footer: Row(
+                            footer: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                Text("${productModel.salePrice}",
-                                    style: TextStyle(fontSize: 10.0),
+                                Text("${productModel.salePrice}Tk",
+                                  style: TextStyle(fontSize: 12.0,fontWeight: FontWeight.bold),
                                   overflow: TextOverflow.ellipsis,
                                 ),
-                                SizedBox(
-                                  width: 2.0,
-                                ),
                                 Text(
-                                  "${productModel.fullPrice}",
+                                  "${productModel.fullPrice}Tk",
                                   style: TextStyle(
                                     fontSize: 10.0,
-                                    color: AppConstant.appSecondaryColor,
+                                    color: Colors.red,
                                     decoration: TextDecoration.lineThrough,
                                   ),
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ],
-                            ),
-                          ),
+                            ),                          ),
                         ),
                       ),
                     ),

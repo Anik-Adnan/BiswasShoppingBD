@@ -1,6 +1,7 @@
 
 import 'package:biswas_shopping_bd/screens/user-panel/all-category-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/all-flashSale-product-screen.dart';
+import 'package:biswas_shopping_bd/widgets/all-products-widget.dart';
 import 'package:biswas_shopping_bd/widgets/categories-widget.dart';
 import 'package:biswas_shopping_bd/widgets/flashSale-widget.dart';
 
@@ -32,14 +33,15 @@ class MainScreen extends StatelessWidget{
                 height: Get.height/95.0
               ),
               BannerWidget(),
+
               HeadingWidget(
                 headingTitle: "Categories",
                 headingSubTitle: "According to your budget",
                 onTap: ()=> Get.to(AllCategoryScreen()),
                 buttonText: "see more>>",
               ),
-
               CategoriesWidget(),
+
               HeadingWidget(
                 headingTitle: "Flash Sale",
                 headingSubTitle: "According to your budget",
@@ -49,6 +51,16 @@ class MainScreen extends StatelessWidget{
                 buttonText: "see more>>",
               ),
               FlashSaleWidget(),
+
+              HeadingWidget(
+                headingTitle: "All Products",
+                headingSubTitle: "According to your budget",
+                onTap: () {
+                  // Get.to(AllFlashSaleProductsScreen());
+                },
+                buttonText: "see more>>",
+              ),
+              AllProductsWidget(),
 
 
 

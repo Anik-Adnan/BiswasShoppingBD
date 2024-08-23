@@ -21,10 +21,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Prodcuts Categories',style: TextStyle(fontWeight: FontWeight.bold),),
-        centerTitle: true,
-        backgroundColor: AppConstant.appSecondaryColor,
-
+        title: Text('Prodcuts Categories'),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('categoris').get(),

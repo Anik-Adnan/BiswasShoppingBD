@@ -22,9 +22,7 @@ class _AllSingleCategoryProductsScreenState extends State<AllSingleCategoryProdu
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.categoryId,style: TextStyle(fontWeight: FontWeight.bold),),
-        centerTitle: true,
-        backgroundColor: AppConstant.appSecondaryColor,
+        title: Text(widget.categoryId),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('product').where('categoryId', isEqualTo: widget.categoryId).get(),

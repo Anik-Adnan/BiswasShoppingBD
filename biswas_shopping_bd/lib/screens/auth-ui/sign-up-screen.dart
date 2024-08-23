@@ -35,8 +35,7 @@ class _SignUpScreenState extends State<SignUpScreen>{
         return Scaffold(
           appBar: AppBar(
             backgroundColor: AppConstant.appSecondaryColor,
-            centerTitle: true,
-            title: const Text('Sign Up',style: TextStyle(fontWeight: FontWeight.bold),),
+            title: const Text('Sign Up'),
           ),
           body: SingleChildScrollView(
             child: ConstrainedBox(  // Ensure it takes full height

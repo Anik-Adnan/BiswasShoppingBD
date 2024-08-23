@@ -1,5 +1,6 @@
 
 import 'package:biswas_shopping_bd/screens/user-panel/all-category-screen.dart';
+import 'package:biswas_shopping_bd/screens/user-panel/all-flashSale-product-screen.dart';
 import 'package:biswas_shopping_bd/widgets/categories-widget.dart';
 import 'package:biswas_shopping_bd/widgets/flashSale-widget.dart';
 
@@ -19,8 +20,7 @@ class MainScreen extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
-        title: Text(AppConstant.appName,style: const TextStyle(fontWeight: FontWeight.bold),),
-        centerTitle: true,
+        title: Text(AppConstant.appName),
       ),
       drawer: const DrawerWidget(),
       body: SingleChildScrollView(
@@ -43,7 +43,9 @@ class MainScreen extends StatelessWidget{
               HeadingWidget(
                 headingTitle: "Flash Sale",
                 headingSubTitle: "According to your budget",
-                onTap: (){},
+                onTap: (){
+                  Get.to(AllFlashSaleProductsScreen());
+                },
                 buttonText: "see more>>",
               ),
               FlashSaleWidget(),

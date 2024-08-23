@@ -1,5 +1,6 @@
 
 import 'package:biswas_shopping_bd/firebase_options.dart';
+import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 
@@ -24,6 +25,16 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: const SplashScreen(),
       builder: EasyLoading.init(),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: AppConstant.appMainColor,
+          centerTitle: true,
+          titleTextStyle: TextStyle(
+              fontWeight: FontWeight.bold,
+            fontSize: 20.0,
+            color: Colors.black),
+        )
+      ),
     );
   }
 }

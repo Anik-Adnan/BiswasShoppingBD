@@ -6,6 +6,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utils/app-constant.dart';
+
 class ProductDetailsScreen extends StatefulWidget{
   ProductModel productModel;
   ProductDetailsScreen({super.key,required this.productModel });
@@ -52,7 +54,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
             ),
 
             Padding(
-              padding: EdgeInsets.only(top: 8.0),
+              padding: EdgeInsets.only(top: 8.0,bottom: 8.0),
               child: Card(
                 elevation: 3.0,
                 shape: RoundedRectangleBorder(
@@ -60,12 +62,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                 ),
                 child: Column(
                   children: [
-                    Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: Container(
-                        alignment: Alignment.topLeft,
-                        child: Text("CategoryID: ${widget.productModel.categoryId}"),
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: Container(
+                            alignment: Alignment.topLeft,
+                            child: Text("CategoryID: ${widget.productModel.categoryId}"),
+                          ),
+                        ),
+                        Icon(Icons.favorite_outline),
+                        
+                      ],
                     ),
                     Padding(
                       padding: EdgeInsets.all(8.0),
@@ -128,8 +137,40 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                   ],
                 ),
               ),
-            )
-
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Material(
+                  child: Container(
+                    width: Get.width * 0.35,
+                    height: Get.height / 20,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: AppConstant.WhatsAppColor,
+                    ),
+                    child: TextButton(
+                      child: const Text("Whats App",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+                Material(
+                  child: Container(
+                    width: Get.width * 0.35,
+                    height: Get.height / 20,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20.0),
+                      color: AppConstant.appSecondaryColor,
+                    ),
+                    child: TextButton(
+                      child: const Text("Add to cart",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
+                      onPressed: () {},
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),

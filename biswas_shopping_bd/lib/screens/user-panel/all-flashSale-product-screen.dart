@@ -1,4 +1,5 @@
 
+import 'package:biswas_shopping_bd/screens/user-panel/product-details.screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -75,7 +76,9 @@ class _AllFlashSaleProductsScreenState extends State<AllFlashSaleProductsScreen>
                 return Row(
                   children: [
                     GestureDetector(
-                      onTap: () => {},
+                      onTap: () => {
+                      Get.to(ProductDetailsScreen(productModel: productModel,)),
+                    },
                       child: Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Container(

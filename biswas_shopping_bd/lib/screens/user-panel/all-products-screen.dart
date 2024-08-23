@@ -1,6 +1,4 @@
 
-
-import 'package:biswas_shopping_bd/models/product-model.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/product-details.screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,44 +6,59 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
-import '../screens/user-panel/all-single-category-products-screen.dart';
-import '../utils/app-constant.dart';
 
-class FlashSaleWidget extends StatelessWidget {
-  const FlashSaleWidget({super.key});
+import '../../models/product-model.dart';
+
+class AllProductsScreen extends StatefulWidget{
+  const AllProductsScreen({super.key});
 
   @override
+  State<AllProductsScreen> createState() => _AllProductsScreenState();
+
+}
+class _AllProductsScreenState extends State<AllProductsScreen>{
+  @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: FirebaseFirestore.instance.collection('product').where('isSale', isEqualTo: true).get(),
-      builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-        if (snapshot.hasError) {
-          return Center(
-            child: Text("Error"),
-          );
-        }
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return Container(
-            height: Get.height / 5,
-            child: Center(
-              child: CupertinoActivityIndicator(),
-            ),
-          );
-        }
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('All Products'),
+      ),
+      body: FutureBuilder(
+        future: FirebaseFirestore.instance.collection('product')
+            // .where('isSale',isEqualTo: false)
+            .get(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasError) {
+            return Center(
+              child: Text("Error"),
+            );
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Container(
+              height: Get.height / 5,
+              child: Center(
+                child: CupertinoActivityIndicator(),
+              ),
+            );
+          }
 
-        if (snapshot.data!.docs.isEmpty) {
-          return Center(
-            child: Text("No category found!"),
-          );
-        }
+          if (snapshot.data!.docs.isEmpty) {
+            return Center(
+              child: Text("No category found!"),
+            );
+          }
 
-        if (snapshot.data != null) {
-          return Container(
-            height: Get.height / 5.0,
-            child: ListView.builder(
+          if (snapshot.data != null) {
+            return GridView.builder(
               itemCount: snapshot.data!.docs.length,
               shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
+              physics: BouncingScrollPhysics(),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 3,
+                crossAxisSpacing: 3,
+                childAspectRatio: 0.7,
+              ),
               itemBuilder: (context, index) {
                 final productData = snapshot.data!.docs[index];
                 ProductModel productModel = ProductModel(
@@ -65,22 +78,24 @@ class FlashSaleWidget extends StatelessWidget {
                 return Row(
                   children: [
                     GestureDetector(
-                      onTap: () => Get.to(ProductDetailsScreen(productModel: productModel,)),
+                      onTap: () => {
+                      Get.to(ProductDetailsScreen(productModel: productModel,)),
+                    },
                       child: Padding(
-                        padding: EdgeInsets.all(5.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Container(
                           child: FillImageCard(
                             borderRadius: 20.0,
-                            width: Get.width / 4.0,
-                            heightImage: Get.height / 12,
+                            width: Get.width / 3.47,
+                            heightImage: Get.height / 10,
                             imageProvider: CachedNetworkImageProvider(
                               productModel.productImages[0],
                             ),
                             title: Center(
                               child: Text(
                                 productModel.productName,
+                                style: TextStyle(fontSize: 14.0),
                                 overflow: TextOverflow.ellipsis,
-                                style: TextStyle(fontSize: 12.0),
                               ),
                             ),
                             footer: Column(
@@ -100,19 +115,21 @@ class FlashSaleWidget extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                 ),
                               ],
-                            ),                          ),
+                            ),
+                          ),
                         ),
                       ),
                     ),
                   ],
                 );
               },
-            ),
-          );
-        }
+            );
+          }
 
-        return Container();
-      },
+          return Container();
+        },
+      ),
     );
   }
+
 }

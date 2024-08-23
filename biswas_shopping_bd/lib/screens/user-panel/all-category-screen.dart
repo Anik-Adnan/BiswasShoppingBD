@@ -1,4 +1,5 @@
 
+import 'package:biswas_shopping_bd/screens/user-panel/all-single-category-products-screen.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -70,9 +71,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
                   return Row(
                     children: [
                       GestureDetector(
-                        onTap: () => (){},
-                        // Get.to(() => AllSingleCategoryProductsScreen(
-                        // categoryId: categoriesModel.categoryId)),
+                        onTap: () => Get.to(AllSingleCategoryProductsScreen(categoryId: categoriesModel.categoryId)),
                         child: Padding(
                           padding: EdgeInsets.all(8.0),
                           child: Container(

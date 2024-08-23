@@ -54,10 +54,8 @@ class CategoriesWidget extends StatelessWidget {
                 return Row(
                   children: [
                     GestureDetector(
-                      onTap: () => (){},
-                      //     Get.to(
-                      //     AllSingleCategoryProductsScreen(categoryId:  categoriesModel.categoryId,),
-                      // ),
+                      onTap: () => Get.to(
+                          AllSingleCategoryProductsScreen(categoryId:  categoriesModel.categoryId,),),
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Container(
@@ -72,6 +70,7 @@ class CategoriesWidget extends StatelessWidget {
                               child: Text(
                                 categoriesModel.categoryName,
                                 style: TextStyle(fontSize: 12.0),
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
                           ),

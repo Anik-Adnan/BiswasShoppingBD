@@ -85,6 +85,7 @@ class FlashSaleWidget extends StatelessWidget {
                               children: [
                                 Text("${productModel.salePrice}",
                                     style: TextStyle(fontSize: 10.0),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 SizedBox(
                                   width: 2.0,
@@ -96,6 +97,7 @@ class FlashSaleWidget extends StatelessWidget {
                                     color: AppConstant.appSecondaryColor,
                                     decoration: TextDecoration.lineThrough,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),

@@ -83,6 +83,7 @@ class _AllCategoryScreenState extends State<AllCategoryScreen>{
                                 child: Text(
                                   categoriesModel.categoryName,
                                   style: TextStyle(fontSize: 12.0),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                             ),

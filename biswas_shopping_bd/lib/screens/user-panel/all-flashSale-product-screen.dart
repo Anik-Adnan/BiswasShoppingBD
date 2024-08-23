@@ -20,7 +20,7 @@ class _AllFlashSaleProductsScreenState extends State<AllFlashSaleProductsScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('FlashSale Prodcuts'),
+        title: Text('FlashSale Products'),
       ),
       body: FutureBuilder(
         future: FirebaseFirestore.instance.collection('product').where('isSale',isEqualTo: true).get(),
@@ -54,7 +54,7 @@ class _AllFlashSaleProductsScreenState extends State<AllFlashSaleProductsScreen>
                 crossAxisCount: 3,
                 mainAxisSpacing: 3,
                 crossAxisSpacing: 3,
-                childAspectRatio: 0.75,
+                childAspectRatio: 0.7,
               ),
               itemBuilder: (context, index) {
                 final productData = snapshot.data!.docs[index];
@@ -81,17 +81,35 @@ class _AllFlashSaleProductsScreenState extends State<AllFlashSaleProductsScreen>
                         child: Container(
                           child: FillImageCard(
                             borderRadius: 20.0,
-                            width: Get.width / 3.5,
-                            heightImage: Get.height / 8,
+                            width: Get.width / 3.47,
+                            heightImage: Get.height / 10,
                             imageProvider: CachedNetworkImageProvider(
                               productModel.productImages[0],
                             ),
                             title: Center(
                               child: Text(
                                 productModel.productName,
-                                style: TextStyle(fontSize: 12.0),
+                                style: TextStyle(fontSize: 14.0),
                                 overflow: TextOverflow.ellipsis,
                               ),
+                            ),
+                            footer: Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Text("${productModel.salePrice}Tk",
+                                  style: TextStyle(fontSize: 12.0,fontWeight: FontWeight.bold),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Text(
+                                  "${productModel.fullPrice}Tk",
+                                  style: TextStyle(
+                                    fontSize: 10.0,
+                                    color: Colors.red,
+                                    decoration: TextDecoration.lineThrough,
+                                  ),
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ],
                             ),
                           ),
                         ),

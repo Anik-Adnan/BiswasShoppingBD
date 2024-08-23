@@ -25,8 +25,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen>{
         return Scaffold(
           appBar: AppBar(
             backgroundColor: AppConstant.appSecondaryColor,
-            centerTitle: true,
-            title: const Text('Forget Password',style: TextStyle(fontWeight: FontWeight.bold),),
+            title: const Text('Forget Password'),
           ),
           body: SingleChildScrollView(
             child: ConstrainedBox(  // Ensure it takes full height

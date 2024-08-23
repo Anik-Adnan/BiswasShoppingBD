@@ -34,8 +34,7 @@ class _SignInScreenState extends State<SignInScreen>{
         return Scaffold(
           appBar: AppBar(
             backgroundColor: AppConstant.appSecondaryColor,
-            centerTitle: true,
-            title: const Text('Sign In',style: TextStyle(fontWeight: FontWeight.bold),),
+            title: const Text('Sign In'),
           ),
           body: SingleChildScrollView(
             child: ConstrainedBox(  // Ensure it takes full height

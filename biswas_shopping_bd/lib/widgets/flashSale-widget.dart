@@ -6,6 +6,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
+import '../screens/user-panel/all-single-category-products-screen.dart';
 import '../utils/app-constant.dart';
 
 class FlashSaleWidget extends StatelessWidget {
@@ -62,9 +63,7 @@ class FlashSaleWidget extends StatelessWidget {
                 return Row(
                   children: [
                     GestureDetector(
-                      onTap: () => (){},
-                      // Get.to(() => AllSingleCategoryProductsScreen(
-                      // categoryId: categoriesModel.categoryId)),
+                      onTap: () => Get.to(AllSingleCategoryProductsScreen(categoryId: productModel.categoryId)),
                       child: Padding(
                         padding: EdgeInsets.all(5.0),
                         child: Container(
@@ -86,6 +85,7 @@ class FlashSaleWidget extends StatelessWidget {
                               children: [
                                 Text("${productModel.salePrice}",
                                     style: TextStyle(fontSize: 10.0),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                                 SizedBox(
                                   width: 2.0,
@@ -97,6 +97,7 @@ class FlashSaleWidget extends StatelessWidget {
                                     color: AppConstant.appSecondaryColor,
                                     decoration: TextDecoration.lineThrough,
                                   ),
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),

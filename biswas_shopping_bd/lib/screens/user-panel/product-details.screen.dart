@@ -151,7 +151,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                     ),
                     child: TextButton(
                       child: const Text("Whats App",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                      onPressed: () {},
+                      onPressed: () {
+
+                      },
                     ),
                   ),
                 ),
@@ -165,7 +167,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                     ),
                     child: TextButton(
                       child: const Text("Add to cart",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                      onPressed: () {},
+                      onPressed: () {
+
+                      },
                     ),
                   ),
                 ),
@@ -173,6 +177,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
             ),
           ],
         ),
+
+
       ),
     );
   }

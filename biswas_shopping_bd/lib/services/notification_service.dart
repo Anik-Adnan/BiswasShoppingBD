@@ -193,20 +193,20 @@ class NotificationService {
       ),
     );
 
-    // if (message.data['screen'] == 'cart') {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => const CartScreen(),
-    //     ),
-    //   );
-    // } else {
-    //   Navigator.push(
-    //     context,
-    //     MaterialPageRoute(
-    //       builder: (context) => NotificationScreen(message: message),
-    //     ),
-    //   );
-    // }
+    if (message.data['screen'] == 'cart') {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const CartScreen(),
+        ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NotificationScreen(message: message),
+        ),
+      );
+    }
   }
 }

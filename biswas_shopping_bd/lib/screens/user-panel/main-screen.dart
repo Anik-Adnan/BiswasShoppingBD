@@ -61,7 +61,7 @@ class MainScreen extends StatelessWidget{
                 },
                 buttonText: "see more>>",
               ),
-              AllProductsWidget(),
+              // AllProductsWidget(),
 
 
 

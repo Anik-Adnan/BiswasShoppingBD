@@ -1,6 +1,8 @@
 
+import 'package:biswas_shopping_bd/controllers/get_customer_device_token.dart';
 import 'package:biswas_shopping_bd/controllers/product_price_controller.dart';
 import 'package:biswas_shopping_bd/models/car-model.dart';
+import 'package:biswas_shopping_bd/services/place_order_service.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -20,6 +22,9 @@ class CheckOutScreen extends StatelessWidget{
   String? name;
   String? phone;
   String? address;
+
+  // final Razorpay _razorpay = Razorpay();
+
 
   @override
   Widget build(BuildContext context) {
@@ -172,7 +177,7 @@ class CheckOutScreen extends StatelessWidget{
   void showCustomBottomSheet() {
     Get.bottomSheet(
       Container(
-        height: Get.height * 0.8,
+        height: Get.height /2.0,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.vertical(
@@ -256,7 +261,6 @@ class CheckOutScreen extends StatelessWidget{
                     customerToken = await getCustomerDeviceToken();
 
                     placeOrder(
-                      context: context,
                       customerName: name!,
                       customerPhone: phone!,
                       customerAddress: address!,

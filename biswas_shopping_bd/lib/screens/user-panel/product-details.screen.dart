@@ -1,11 +1,11 @@
 
 import 'package:biswas_shopping_bd/models/car-model.dart';
 import 'package:biswas_shopping_bd/models/product-model.dart';
+import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,6 +29,14 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
     return Scaffold(
       appBar: AppBar(
         title: Text('Product Info'),
+        actions:  [
+          GestureDetector(
+            onTap: ()=> Get.to(CartScreen()),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.shopping_cart,color: Colors.black,)),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(

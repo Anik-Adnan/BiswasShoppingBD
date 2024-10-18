@@ -1,14 +1,11 @@
 
 import 'package:biswas_shopping_bd/screens/user-panel/product-details.screen.dart';
-import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_card/image_card.dart';
-
-import '../../models/category-model.dart';
 import '../../models/product-model.dart';
 
 class AllSingleCategoryProductsScreen extends StatefulWidget{
@@ -30,7 +27,7 @@ class _AllSingleCategoryProductsScreenState extends State<AllSingleCategoryProdu
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
             return Center(
-              child: Text("Error"),
+              child: const Text("Error"),
             );
           }
           if (snapshot.connectionState == ConnectionState.waiting) {
@@ -44,7 +41,7 @@ class _AllSingleCategoryProductsScreenState extends State<AllSingleCategoryProdu
 
           if (snapshot.data!.docs.isEmpty) {
             return Center(
-              child: Text("No category found!"),
+              child:const  Text("No category found!"),
             );
           }
 

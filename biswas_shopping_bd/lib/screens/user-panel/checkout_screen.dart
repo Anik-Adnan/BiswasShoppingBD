@@ -1,7 +1,6 @@
 
 import 'package:biswas_shopping_bd/controllers/product_price_controller.dart';
 import 'package:biswas_shopping_bd/models/car-model.dart';
-import 'package:biswas_shopping_bd/screens/user-panel/checkout_screen.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,9 +8,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 import 'package:get/get.dart';
-class CartScreen extends StatelessWidget{
+class CheckOutScreen extends StatelessWidget{
   User? user = FirebaseAuth.instance.currentUser;
   final ProductPriceController productPriceController = Get.put(ProductPriceController());
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+
+  String? customerToken;
+  String? name;
+  String? phone;
+  String? address;
 
   @override
   Widget build(BuildContext context) {
@@ -110,56 +118,6 @@ class CartScreen extends StatelessWidget{
                             SizedBox(
                               width: Get.width / 20.0,
                             ),
-                            GestureDetector(
-                              onTap: () async {
-                                if (cartModel.productQuantity > 1) {
-                                  await FirebaseFirestore.instance
-                                      .collection('cart')
-                                      .doc(user!.uid)
-                                      .collection('cartOrders')
-                                      .doc(cartModel.productId)
-                                      .update({
-                                    'productQuantity':
-                                    cartModel.productQuantity - 1,
-                                    'productTotalPrice':
-                                    (double.parse(cartModel.fullPrice) *
-                                        (cartModel.productQuantity - 1))
-                                  });
-                                }
-                              },
-                              child: CircleAvatar(
-                                radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('-'),
-                              ),
-                            ),
-                            SizedBox(
-                              width: Get.width / 20.0,
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                if (cartModel.productQuantity > 0) {
-                                  await FirebaseFirestore.instance
-                                      .collection('cart')
-                                      .doc(user!.uid)
-                                      .collection('cartOrders')
-                                      .doc(cartModel.productId)
-                                      .update({
-                                    'productQuantity':
-                                    cartModel.productQuantity + 1,
-                                    'productTotalPrice':
-                                    double.parse(cartModel.fullPrice) +
-                                        double.parse(cartModel.fullPrice) *
-                                            (cartModel.productQuantity)
-                                  });
-                                }
-                              },
-                              child: CircleAvatar(
-                                radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('+'),
-                              ),
-                            )
                           ],
                         ),
                       ),
@@ -187,23 +145,23 @@ class CartScreen extends StatelessWidget{
               padding: EdgeInsets.only(left: 8.0,),
               child: Material(
                 child: Container(
-                  width: Get.width / 4.0,
-                  height: Get.height / 18,
+                  width: Get.width / 3,
+                  height: Get.height / 16,
                   decoration: BoxDecoration(
                     color: AppConstant.appSecondaryColor,
                     borderRadius: BorderRadius.circular(20.0),
                   ),
                   child: TextButton(
                     child: Text(
-                      "CheckOut",
+                      "Confirm Order",
                       style: TextStyle(color: AppConstant.apptextColor,fontWeight: FontWeight.bold,fontSize: 16.0),
                     ),
                     onPressed: () {
-                      Get.to(() => CheckOutScreen());
+                      showCustomBottomSheet();
                     },
                   ),
                 ),
-            ),
+              ),
             ),
           ],
         ),
@@ -211,4 +169,131 @@ class CartScreen extends StatelessWidget{
     );
   }
 
+  void showCustomBottomSheet() {
+    Get.bottomSheet(
+      Container(
+        height: Get.height * 0.8,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(
+            top: Radius.circular(16.0),
+          ),
+        ),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0),
+                child: Container(
+                  height: 55.0,
+                  child: TextFormField(
+                    controller: nameController,
+                    decoration: InputDecoration(
+                      labelText: 'Name',
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                      ),
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0),
+                child: Container(
+                  height: 55.0,
+                  child: TextFormField(
+                    controller: phoneController,
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.phone,
+                    decoration: InputDecoration(
+                      labelText: 'Phone',
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                      ),
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 20.0, vertical: 20.0),
+                child: Container(
+                  height: 55.0,
+                  child: TextFormField(
+                    controller: addressController,
+                    decoration: InputDecoration(
+                      labelText: 'Address',
+                      contentPadding: EdgeInsets.symmetric(
+                        horizontal: 10.0,
+                      ),
+                      hintStyle: TextStyle(
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppConstant.appMainColor,
+                  padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                ),
+                onPressed: () async {
+                  if (nameController.text != '' &&
+                      phoneController.text != '' &&
+                      addressController.text != '') {
+                    name = nameController.text.trim();
+                    phone = phoneController.text.trim();
+                    address = addressController.text.trim();
+                    customerToken = await getCustomerDeviceToken();
+
+                    placeOrder(
+                      context: context,
+                      customerName: name!,
+                      customerPhone: phone!,
+                      customerAddress: address!,
+                      customerDeviceToken: customerToken!,
+                    );
+
+                    // var options = {
+                    //   'key': 'Your key',
+                    //   'amount': 1000,
+                    //   'currency': 'USD',
+                    //   'name': 'Acme Corp.',
+                    //   'description': 'Fine T-Shirt',
+                    //   'prefill': {
+                    //     'contact': '8888888888',
+                    //     'email': 'test@razorpay.com'
+                    //   }
+                    // };
+
+                    // _razorpay.open(options);
+                  } else {
+                    print("Fill The Details");
+                  }
+                },
+                child: Text(
+                  "Place Order",
+                  style: TextStyle(color: Colors.white),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      backgroundColor: Colors.transparent,
+      isDismissible: true,
+      enableDrag: true,
+      elevation: 6,
+    );
+  }
 }
+

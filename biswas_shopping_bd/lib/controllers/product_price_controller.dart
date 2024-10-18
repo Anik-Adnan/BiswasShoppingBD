@@ -26,6 +26,9 @@ class ProductPriceController extends GetxController{
       if(data != null && data.containsKey('productTotalPrice')){
         sum += (data['productTotalPrice'] as num).toDouble();
       }
+      else{
+        sum = 0.0;
+      }
 
     }
     totalPrice.value = sum;

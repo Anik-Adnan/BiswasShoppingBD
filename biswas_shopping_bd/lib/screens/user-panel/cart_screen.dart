@@ -9,7 +9,14 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 import 'package:get/get.dart';
-class CartScreen extends StatelessWidget{
+class CartScreen extends StatefulWidget {
+  const CartScreen({super.key});
+
+  @override
+  State<CartScreen> createState() => _CartScreenState();
+}
+
+class _CartScreenState extends State<CartScreen> {
   User? user = FirebaseAuth.instance.currentUser;
   final ProductPriceController productPriceController = Get.put(ProductPriceController());
 

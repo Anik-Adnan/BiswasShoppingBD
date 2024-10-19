@@ -217,12 +217,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
 
   static Future<void> sendMessageOnWhatsApp({required ProductModel productModel}) async{
 
-    final number = "+8801986844989";
+    final number = "+8801650107332";
     final message = "Hello ${AppConstant.appName}!\nI want to know about this product\nProduct Name: ${productModel.productName}\nProduct ID: ${productModel.productId}";
-    final url = "https://wa.me/$number?text=${Uri.encodeComponent(message)}";
+    final url = 'https://wa.me/$number?text=${Uri.encodeComponent(message)}';
 
     try {
-      Uri requestedUri = Uri.parse(url);// .parse
+      Uri requestedUri = Uri.parse(url);// .parse is the correct method
+
       if (await canLaunchUrl(requestedUri)) {
         await launchUrl(requestedUri);
       } else {

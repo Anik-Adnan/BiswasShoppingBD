@@ -1,10 +1,16 @@
 
+import 'package:biswas_shopping_bd/models/car-model.dart';
 import 'package:biswas_shopping_bd/models/product-model.dart';
+import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../utils/app-constant.dart';
 
@@ -17,11 +23,22 @@ class ProductDetailsScreen extends StatefulWidget{
   
 }
 class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
+
+  User? user = FirebaseAuth.instance.currentUser;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: Text('Product Info'),
+        actions:  [
+          GestureDetector(
+            onTap: ()=> Get.to(CartScreen()),
+            child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.shopping_cart,color: Colors.black,)),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Container(
@@ -156,7 +173,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                         child: TextButton(
                           child: const Text("Whats App",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
                           onPressed: () {
-                        
+
+                            sendMessageOnWhatsApp(productModel: widget.productModel);
                           },
                         ),
                       ),
@@ -171,8 +189,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                         ),
                         child: TextButton(
                           child: const Text("Add to cart",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
-                          onPressed: () {
-                        
+                          onPressed: () async {
+
+                            await checkProductExistence(uId: user!.uid);
+
+                            Get.snackbar(
+                              "Product added to the cart",
+                              "Please! confrim the order.",
+                              colorText: Colors.white,
+                              duration: Duration(seconds: 5),
+                            );
                           },
                         ),
                       ),
@@ -187,6 +213,88 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
         ),
       ),
     );
+  }
+
+  static Future<void> sendMessageOnWhatsApp({required ProductModel productModel}) async{
+
+    final number = "+8801650107332";
+    final message = "Hello ${AppConstant.appName}!\nI want to know about this product\nProduct Name: ${productModel.productName}\nProduct ID: ${productModel.productId}";
+    final url = 'https://wa.me/$number?text=${Uri.encodeComponent(message)}';
+
+    try {
+      Uri requestedUri = Uri.parse(url);// .parse is the correct method
+
+      if (await canLaunchUrl(requestedUri)) {
+        await launchUrl(requestedUri);
+      } else {
+        throw  Exception('Could not launch $url');
+      }
+    } on PlatformException catch (e) {
+      debugPrint("PlatformException launchInBrowser : $e");
+    } on Exception catch (e) {
+      debugPrint( "Exception launchInBrowser : $e");
+    }
+
+  }
+
+
+  Future<void> checkProductExistence({
+    required String uId,
+    int quantityIncrement = 1,
+  }) async {
+    final DocumentReference documentReference = FirebaseFirestore.instance
+        .collection('cart')
+        .doc(uId)
+        .collection('cartOrders')
+        .doc(widget.productModel.productId.toString());
+
+    DocumentSnapshot snapshot = await documentReference.get();
+
+    if (snapshot.exists) {
+      int currentQuantity = snapshot['productQuantity'];
+      int updatedQuantity = currentQuantity + quantityIncrement;
+      double totalPrice = double.parse(widget.productModel.isSale
+          ? widget.productModel.salePrice
+          : widget.productModel.fullPrice) *
+          updatedQuantity;
+
+      await documentReference.update({
+        'productQuantity': updatedQuantity,
+        'productTotalPrice': totalPrice
+      });
+
+      print("product exists");
+    } else {
+      await FirebaseFirestore.instance.collection('cart').doc(uId).set(
+        {
+          'uId': uId,
+          'createdAt': DateTime.now(),
+        },
+      );
+
+      CartModel cartModel = CartModel(
+        productId: widget.productModel.productId,
+        categoryId: widget.productModel.categoryId,
+        productName: widget.productModel.productName,
+        categoryName: widget.productModel.categoryName,
+        salePrice: widget.productModel.salePrice,
+        fullPrice: widget.productModel.fullPrice,
+        productImages: widget.productModel.productImages,
+        deliveryTime: widget.productModel.deliveryTime,
+        isSale: widget.productModel.isSale,
+        productDescription: widget.productModel.productDescription,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        productQuantity: 1,
+        productTotalPrice: double.parse(widget.productModel.isSale
+            ? widget.productModel.salePrice
+            : widget.productModel.fullPrice),
+      );
+
+      await documentReference.set(cartModel.toMap());
+
+      print("product added");
+    }
   }
   
 }

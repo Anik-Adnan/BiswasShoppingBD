@@ -2,6 +2,7 @@
 import 'package:biswas_shopping_bd/screens/user-panel/all-category-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/all-flashSale-product-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/all-products-screen.dart';
+import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
 import 'package:biswas_shopping_bd/widgets/all-products-widget.dart';
 import 'package:biswas_shopping_bd/widgets/categories-widget.dart';
 import 'package:biswas_shopping_bd/widgets/flashSale-widget.dart';
@@ -23,6 +24,14 @@ class MainScreen extends StatelessWidget{
       appBar: AppBar(
         backgroundColor: AppConstant.appMainColor,
         title: Text(AppConstant.appName),
+        actions:  [
+          GestureDetector(
+            onTap: ()=> Get.to(CartScreen()),
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+                child: Icon(Icons.shopping_cart,color: Colors.black,)),
+          ),
+        ],
       ),
       drawer: const DrawerWidget(),
       body: SingleChildScrollView(

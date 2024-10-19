@@ -1,4 +1,6 @@
 
+import 'package:biswas_shopping_bd/screens/user-panel/all_order_screen.dart';
+
 import '/utils/app-constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -66,12 +68,16 @@ class _DrawerWidgetState extends State<DrawerWidget>{
                   leading: Icon(Icons.production_quantity_limits),
                 )
             ),
-           const Padding(
+            Padding(
                 padding: EdgeInsets.symmetric(horizontal: 10.0,),
                 child: ListTile(
                   titleAlignment: ListTileTitleAlignment.center,
                   title: Text("Orders",style: TextStyle(fontWeight: FontWeight.bold),),
                   leading: Icon(Icons.shopping_bag),
+                  onTap: (){
+                    // Get.back();
+                    Get.to(()=>AllOrderScreen());
+                  },
                 )
             ),
             const Padding(

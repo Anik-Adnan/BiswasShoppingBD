@@ -8,7 +8,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../utils/app-constant.dart';
 
@@ -171,7 +173,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                         child: TextButton(
                           child: const Text("Whats App",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
                           onPressed: () {
-                        
+
+                            sendMessageOnWhatsApp(productModel: widget.productModel);
                           },
                         ),
                       ),
@@ -211,6 +214,28 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
       ),
     );
   }
+
+  static Future<void> sendMessageOnWhatsApp({required ProductModel productModel}) async{
+
+    final number = "+8801986844989";
+    final message = "Hello ${AppConstant.appName}!\nI want to know about this product\nProduct Name: ${productModel.productName}\nProduct ID: ${productModel.productId}";
+    final url = "https://wa.me/$number?text=${Uri.encodeComponent(message)}";
+
+    try {
+      Uri requestedUri = Uri.parse(url);// .parse
+      if (await canLaunchUrl(requestedUri)) {
+        await launchUrl(requestedUri);
+      } else {
+        throw  Exception('Could not launch $url');
+      }
+    } on PlatformException catch (e) {
+      debugPrint("PlatformException launchInBrowser : $e");
+    } on Exception catch (e) {
+      debugPrint( "Exception launchInBrowser : $e");
+    }
+
+  }
+
 
   Future<void> checkProductExistence({
     required String uId,

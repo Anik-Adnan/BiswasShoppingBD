@@ -197,7 +197,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                               "Product added to the cart",
                               "Please! confrim the order.",
                               colorText: Colors.white,
-                              duration: Duration(seconds: 5),
+                              duration: Duration(seconds: 1),
                             );
                           },
                         ),
@@ -234,6 +234,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
     } on Exception catch (e) {
       debugPrint( "Exception launchInBrowser : $e");
     }
+
+    //add androidmenifest.xml
+    /*
+    <!-- for Url Luncher -->
+    <queries>
+    <intent>
+    <action android:name="android.intent.action.VIEW" />
+    <category android:name="android.intent.category.BROWSABLE" />
+    <data android:scheme="https" />
+    </intent>
+    </queries>
+     */
 
   }
 

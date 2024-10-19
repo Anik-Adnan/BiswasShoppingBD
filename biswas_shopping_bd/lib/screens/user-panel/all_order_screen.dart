@@ -1,7 +1,7 @@
 
 import 'package:biswas_shopping_bd/controllers/product_price_controller.dart';
 import 'package:biswas_shopping_bd/models/car-model.dart';
-import 'package:biswas_shopping_bd/screens/user-panel/checkout_screen.dart';
+import 'package:biswas_shopping_bd/models/order-model.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,13 +25,13 @@ class _AllOrderScreenState extends State<AllOrderScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cart Screen'),
+        title: Text('Orders'),
       ),
       body: StreamBuilder(
         stream: FirebaseFirestore.instance
-            .collection('cart')
+            .collection('orders')
             .doc(user!.uid)
-            .collection('cartOrders')
+            .collection('confirmOrders')
             .snapshots(),
         builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
           if (snapshot.hasError) {
@@ -62,7 +62,8 @@ class _AllOrderScreenState extends State<AllOrderScreen> {
                 physics: BouncingScrollPhysics(),
                 itemBuilder: (context, index) {
                   final productData = snapshot.data!.docs[index];
-                  CartModel cartModel = CartModel(
+
+                  OrderModel orderModel = OrderModel(
                     productId: productData['productId'],
                     categoryId: productData['categoryId'],
                     productName: productData['productName'],
@@ -76,14 +77,20 @@ class _AllOrderScreenState extends State<AllOrderScreen> {
                     createdAt: productData['createdAt'],
                     updatedAt: productData['updatedAt'],
                     productQuantity: productData['productQuantity'],
-                    productTotalPrice: double.parse(
-                        productData['productTotalPrice'].toString()),
+                    productTotalPrice: double.parse(productData['productTotalPrice'].toString()),
+                    customerId: productData['customerId'],
+                    status: productData['status'],
+                    customerName: productData['customerName'],
+                    customerPhone: productData['customerPhone'],
+                    customerAddress: productData['customerAddress'],
+                    customerDeviceToken: productData['customerDeviceToken'],
+
                   );
 
                   //calculate price
                   productPriceController.fetchProductPrice();
                   return SwipeActionCell(
-                    key: ObjectKey(cartModel.productId),
+                    key: ObjectKey(orderModel.productId),
                     trailingActions: [
                       SwipeAction(
                         title: "Delete",
@@ -93,10 +100,10 @@ class _AllOrderScreenState extends State<AllOrderScreen> {
                           print('deleted');
 
                           await FirebaseFirestore.instance
-                              .collection('cart')
+                              .collection('orders')
                               .doc(user!.uid)
-                              .collection('cartOrders')
-                              .doc(cartModel.productId)
+                              .collection('confirmOrders')
+                              .doc(orderModel.productId)
                               .delete();
                         },
                       )
@@ -108,66 +115,19 @@ class _AllOrderScreenState extends State<AllOrderScreen> {
                         leading: CircleAvatar(
                           backgroundColor: AppConstant.appMainColor,
                           backgroundImage:
-                          NetworkImage(cartModel.productImages[0]),
+                          NetworkImage(orderModel.productImages[0]),
                         ),
-                        title: Text(cartModel.productName),
+                        title: Text(orderModel.productName),
                         subtitle: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(cartModel.productTotalPrice.toString()),
+                            Text(orderModel.productTotalPrice.toString()),
                             SizedBox(
                               width: Get.width / 20.0,
                             ),
-                            GestureDetector(
-                              onTap: () async {
-                                if (cartModel.productQuantity > 1) {
-                                  await FirebaseFirestore.instance
-                                      .collection('cart')
-                                      .doc(user!.uid)
-                                      .collection('cartOrders')
-                                      .doc(cartModel.productId)
-                                      .update({
-                                    'productQuantity':
-                                    cartModel.productQuantity - 1,
-                                    'productTotalPrice':
-                                    (double.parse(cartModel.fullPrice) *
-                                        (cartModel.productQuantity - 1))
-                                  });
-                                }
-                              },
-                              child: CircleAvatar(
-                                radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('-'),
-                              ),
-                            ),
-                            SizedBox(
-                              width: Get.width / 20.0,
-                            ),
-                            GestureDetector(
-                              onTap: () async {
-                                if (cartModel.productQuantity > 0) {
-                                  await FirebaseFirestore.instance
-                                      .collection('cart')
-                                      .doc(user!.uid)
-                                      .collection('cartOrders')
-                                      .doc(cartModel.productId)
-                                      .update({
-                                    'productQuantity':
-                                    cartModel.productQuantity + 1,
-                                    'productTotalPrice':
-                                    double.parse(cartModel.fullPrice) +
-                                        double.parse(cartModel.fullPrice) *
-                                            (cartModel.productQuantity)
-                                  });
-                                }
-                              },
-                              child: CircleAvatar(
-                                radius: 14.0,
-                                backgroundColor: AppConstant.appMainColor,
-                                child: Text('+'),
-                              ),
-                            )
+                            orderModel.status != true ?
+                            Text("Pending...", style: TextStyle(color: Colors.green,fontWeight: FontWeight.bold),)
+                                : Text("Deliverd", style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
                           ],
                         ),
                       ),
@@ -182,40 +142,6 @@ class _AllOrderScreenState extends State<AllOrderScreen> {
         },
       ),
 
-
-      bottomNavigationBar: Container(
-        padding: EdgeInsets.all(8.0),
-
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Obx( ()=> Text("Total: ${productPriceController.totalPrice.value.toStringAsFixed(2)} Tk",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0),),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 8.0,),
-              child: Material(
-                child: Container(
-                  width: Get.width / 4.0,
-                  height: Get.height / 18,
-                  decoration: BoxDecoration(
-                    color: AppConstant.appSecondaryColor,
-                    borderRadius: BorderRadius.circular(20.0),
-                  ),
-                  child: TextButton(
-                    child: Text(
-                      "CheckOut",
-                      style: TextStyle(color: AppConstant.apptextColor,fontWeight: FontWeight.bold,fontSize: 16.0),
-                    ),
-                    onPressed: () {
-                      Get.to(() => CheckOutScreen());
-                    },
-                  ),
-                ),
-              ),
-            ),
-          ],
-        ),
-      ),
     );
   }
 

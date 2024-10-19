@@ -75,7 +75,7 @@ class _DrawerWidgetState extends State<DrawerWidget>{
                   title: Text("Orders",style: TextStyle(fontWeight: FontWeight.bold),),
                   leading: Icon(Icons.shopping_bag),
                   onTap: (){
-                    // Get.back();
+                    Get.back();
                     Get.to(()=>AllOrderScreen());
                   },
                 )

@@ -187,7 +187,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                         child: TextButton(
                           child: const Text("Add to cart",style: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),),
                           onPressed: () async {
+
                             await checkProductExistence(uId: user!.uid);
+
+                            Get.snackbar(
+                              "Product added to the cart",
+                              "Please! confrim the order.",
+                              colorText: Colors.white,
+                              duration: Duration(seconds: 5),
+                            );
                           },
                         ),
                       ),

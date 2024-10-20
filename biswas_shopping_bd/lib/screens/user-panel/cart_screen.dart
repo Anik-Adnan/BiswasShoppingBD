@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 import 'package:get/get.dart';
 class CartScreen extends StatefulWidget {
@@ -105,15 +106,35 @@ class _CartScreenState extends State<CartScreen> {
                       color: AppConstant.appStatusBarColor,
                       child: ListTile(
                         leading: CircleAvatar(
-                          backgroundColor: AppConstant.appMainColor,
-                          backgroundImage:
-                          NetworkImage(cartModel.productImages[0]),
+                          // backgroundColor: AppConstant.appMainColor,
+                          child: ClipOval(
+                            child: Image.network(
+                              cartModel.productImages[0],
+                              fit: BoxFit.cover,
+                              width: 50.0,
+                              height: 50.0,
+                              loadingBuilder: (BuildContext context, Widget child, ImageChunkEvent? loadingProgress) {
+                                if (loadingProgress == null) {
+                                  return child; // Image loaded successfully
+                                } else {
+                                  return Center(
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 1.0,
+                                    ),
+                                  );
+                                }
+                              },
+                              errorBuilder: (context, error, stackTrace) {
+                                return Icon(Icons.error); // Handle image load error
+                              },
+                            ),
+                          ),
                         ),
-                        title: Text(cartModel.productName),
+                        title: Text(cartModel.productName,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18.0)),
                         subtitle: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Text(cartModel.productTotalPrice.toString()),
+                            Text("${cartModel.productTotalPrice.toString()} Tk"),
                             SizedBox(
                               width: Get.width / 20.0,
                             ),
@@ -135,13 +156,17 @@ class _CartScreenState extends State<CartScreen> {
                                 }
                               },
                               child: CircleAvatar(
-                                radius: 14.0,
+                                radius: 12.0,
                                 backgroundColor: AppConstant.appMainColor,
-                                child: Text('-'),
+                                child: Text('-',style: TextStyle(fontWeight: FontWeight.bold)),
                               ),
                             ),
                             SizedBox(
-                              width: Get.width / 20.0,
+                              width: Get.width / 60.0,
+                            ),
+                            Text("${cartModel.productQuantity.toString()}"),
+                            SizedBox(
+                              width: Get.width / 60.0,
                             ),
                             GestureDetector(
                               onTap: () async {
@@ -162,9 +187,9 @@ class _CartScreenState extends State<CartScreen> {
                                 }
                               },
                               child: CircleAvatar(
-                                radius: 14.0,
+                                radius: 12.0,
                                 backgroundColor: AppConstant.appMainColor,
-                                child: Text('+'),
+                                child: Text('+',style: TextStyle(fontWeight: FontWeight.bold),),
                               ),
                             )
                           ],

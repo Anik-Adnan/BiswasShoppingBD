@@ -2,6 +2,7 @@
 import 'package:biswas_shopping_bd/controllers/product_price_controller.dart';
 import 'package:biswas_shopping_bd/models/car-model.dart';
 import 'package:biswas_shopping_bd/models/order-model.dart';
+import 'package:biswas_shopping_bd/screens/user-panel/add_review_screen.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -119,7 +120,7 @@ class _AllOrderScreenState extends State<AllOrderScreen> {
                         ),
                         title: Text(orderModel.productName),
                         subtitle: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Text(orderModel.productTotalPrice.toString()),
                             SizedBox(
@@ -130,6 +131,11 @@ class _AllOrderScreenState extends State<AllOrderScreen> {
                                 : Text("Deliverd", style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),),
                           ],
                         ),
+                        trailing: orderModel.status ==true ? ElevatedButton(
+                            onPressed: () => Get.to(
+                                    ()=> AddReviewScreen(orderModel: orderModel)),
+                            child: Text("Review"))
+                            :SizedBox.shrink(),
                       ),
                     ),
                   );

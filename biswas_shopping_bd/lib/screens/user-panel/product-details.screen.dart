@@ -1,4 +1,5 @@
 
+import 'package:biswas_shopping_bd/controllers/rating_controller.dart';
 import 'package:biswas_shopping_bd/models/car-model.dart';
 import 'package:biswas_shopping_bd/models/product-model.dart';
 import 'package:biswas_shopping_bd/models/review_model.dart';
@@ -10,6 +11,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:get/get.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -24,10 +26,11 @@ class ProductDetailsScreen extends StatefulWidget{
   
 }
 class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
-
   User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
+    CalculateProductRatingCotroller calculateProductRatingCotroller = Get.put(CalculateProductRatingCotroller(widget.productModel.productId));
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Product Info'),
@@ -80,9 +83,37 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                   ),
                   child: Column(
                     children: [
+                      // abg rating
+                      Container(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            RatingBar.builder(
+                              initialRating: double.parse(
+                                calculateProductRatingCotroller.avgRating.toString(),
+                              ),
+                              ignoreGestures: true,
+                              minRating: 1,
+                              direction: Axis.horizontal,
+                              allowHalfRating: true,
+                              itemCount: 5,
+                              itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                              itemBuilder: (context, _) => Icon(
+                                Icons.star,
+                                color: Colors.amber,
+                              ),
+                              onRatingUpdate: (value) {},
+                            ),
+                            Text(calculateProductRatingCotroller.avgRating.toString(),style: TextStyle(fontWeight: FontWeight.bold),)
+                          ],
+                        ),
+                      ),
+
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+
                           Padding(
                             padding: EdgeInsets.all(8.0),
                             child: Container(
@@ -130,19 +161,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                           ),
                         ),
                       ),
-                      // Padding(
-                      //   padding: EdgeInsets.all(8.0),
-                      //   child: Container(
-                      //     alignment: Alignment.topLeft,
-                      //
-                      //     child: Row(
-                      //       children: [
-                      //         Text('Full Price: '),
-                      //         Text("${widget.productModel.fullPrice} Tk",style: TextStyle(fontWeight: FontWeight.bold),),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                       Padding(
                         padding: EdgeInsets.all(8.0),
                         child: Container(

@@ -23,17 +23,17 @@ class CalculateProductRatingCotroller extends GetxController{
         .listen(
         (snapshots) {
           if(snapshots.docs.isNotEmpty){
-            double totalrating = 0;
+            double totalrating = 0.0;
             int numberOfReviews = 0;
 
             snapshots.docs.forEach(
                 (doc){
                   final ratingAsString = doc['rating'] as String;
-                  final rating = double.parse(ratingAsString);
+                  final rating = double.tryParse(ratingAsString);
 
                   if(rating != null){
                      totalrating += rating;
-                     numberOfReviews ++;
+                     numberOfReviews++;
                   }
                 });
             if(numberOfReviews != 0){
@@ -42,6 +42,8 @@ class CalculateProductRatingCotroller extends GetxController{
               avgRating.value = 0.0;
             }
 
+          }else{
+            avgRating.value = 0.0;
           }
         });
   }

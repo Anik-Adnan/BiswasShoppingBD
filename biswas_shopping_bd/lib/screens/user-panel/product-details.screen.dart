@@ -26,7 +26,6 @@ class ProductDetailsScreen extends StatefulWidget{
 class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
 
   User? user = FirebaseAuth.instance.currentUser;
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -258,8 +257,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                               child: Text(reviewModel.customerName[0].toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22.0),),
                             ),
                             title: Text(reviewModel.customerName,style: TextStyle(fontWeight: FontWeight.bold),),
-                            subtitle: Text(reviewModel.feedback,style: TextStyle(),),
-                            trailing: Text(textAlign: TextAlign.justify, reviewModel.rating,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0,),),
+                            subtitle: Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(reviewModel.feedback,style: TextStyle(),)
+                            ),
+                            trailing: Text(textAlign: TextAlign.justify,
+                              '${reviewModel.rating} ⭐',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0,),),
                           ),
                         );
                       },

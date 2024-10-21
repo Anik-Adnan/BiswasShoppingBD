@@ -89,21 +89,27 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            RatingBar.builder(
-                              initialRating: double.parse(
-                                calculateProductRatingCotroller.avgRating.toString(),
-                              ),
-                              ignoreGestures: true,
-                              minRating: 1,
-                              direction: Axis.horizontal,
-                              allowHalfRating: true,
-                              itemCount: 5,
-                              itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
-                              itemBuilder: (context, _) => Icon(
-                                Icons.star,
-                                color: Colors.amber,
-                              ),
-                              onRatingUpdate: (value) {},
+                            Obx(
+                                  ()=> Padding(
+                                    padding: EdgeInsets.symmetric(vertical: 8.0),
+                                    child: RatingBar.builder(
+                                      initialRating: double.parse(
+                                        calculateProductRatingCotroller.avgRating.value.toString(),
+                                      ),
+                                      ignoreGestures: true,
+                                      minRating: 1,
+                                      direction: Axis.horizontal,
+                                      allowHalfRating: true,
+                                      itemCount: 5,
+                                      itemPadding: EdgeInsets.symmetric(horizontal: 2.0),
+                                      itemBuilder: (context, _) => Icon(
+                                        Icons.star,
+                                        color: Colors.amber,
+                                      ),
+                                      onRatingUpdate: (value) {
+                                      },
+                                                                      ),
+                                  ),
                             ),
                             Text(calculateProductRatingCotroller.avgRating.toString(),style: TextStyle(fontWeight: FontWeight.bold),)
                           ],

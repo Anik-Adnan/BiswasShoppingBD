@@ -11,40 +11,45 @@ class CalculateProductRatingCotroller extends GetxController{
 
   @override
   void onInit() {
-    super.onInit();
     calculateAvgRating();
+    super.onInit();
   }
 
-  void calculateAvgRating(){
-    FirebaseFirestore.instance.collection('product')
+  void calculateAvgRating() async{
+    await FirebaseFirestore.instance.collection('product')
         .doc(productId)
         .collection('reviews')
         .snapshots()
         .listen(
-        (snapshots) {
-          if(snapshots.docs.isNotEmpty){
+        (snapshot) {
+          if(snapshot.docs.isNotEmpty){
             double totalrating = 0.0;
             int numberOfReviews = 0;
 
-            snapshots.docs.forEach(
+            snapshot.docs.forEach(
                 (doc){
-                  final ratingAsString = doc['rating'] as String;
-                  final rating = double.tryParse(ratingAsString);
+                  final rating = doc['rating'] as double;
+                  // final rating = double.tryParse(ratingAsString);
 
                   if(rating != null){
                      totalrating += rating;
                      numberOfReviews++;
+                     print(rating);
                   }
                 });
             if(numberOfReviews != 0){
               avgRating.value = totalrating / numberOfReviews;
             }else{
-              avgRating.value = 0.0;
+              avgRating.value = 1.0;
             }
 
           }else{
-            avgRating.value = 0.0;
+            avgRating.value = 1.0;
           }
         });
+    await FirebaseFirestore.instance.collection('product')
+        .doc(productId)
+        .update({'avgRating': avgRating});
   }
+
 }

@@ -1,6 +1,7 @@
 
 import 'package:biswas_shopping_bd/models/car-model.dart';
 import 'package:biswas_shopping_bd/models/product-model.dart';
+import 'package:biswas_shopping_bd/models/review_model.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -206,6 +207,72 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                   ],
                 ),
               ),
+
+              // reviews
+              FutureBuilder(
+                future: FirebaseFirestore.instance.collection('product').doc(widget.productModel.productId).collection('reviews').get(),
+                builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+                  if (snapshot.hasError) {
+                    return Center(
+                      child: Text("Error"),
+                    );
+                  }
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Container(
+                      height: Get.height / 5,
+                      child: Center(
+                        child: CupertinoActivityIndicator(),
+                      ),
+                    );
+                  }
+
+                  if (snapshot.data!.docs.isEmpty) {
+                    return Center(
+                      child: Text("No Reviews found!"),
+                    );
+                  }
+
+                  if (snapshot.data != null) {
+                    return ListView.builder(
+                      itemCount: snapshot.data!.docs.length,
+                      shrinkWrap: true,
+                      physics: BouncingScrollPhysics(),
+
+                      itemBuilder: (context, index) {
+                        var data = snapshot.data!.docs[index];
+
+                        ReviewModel reviewModel = ReviewModel(
+                            customerName: data['customerName'],
+                            customerPhone: data['customerPhone'],
+                            customerDeviceToken: data['customerDeviceToken'],
+                            customerId: data['customerId'],
+                            feedback: data['feedback'],
+                            rating: data['rating'],
+                            createdAt: data['createdAt'],
+                        );
+                        
+                        return Card(
+                          elevation: 1,
+                          child: ListTile(
+                            leading: CircleAvatar(
+                              child: Text(reviewModel.customerName[0].toUpperCase(),style: TextStyle(fontWeight: FontWeight.bold,fontSize: 22.0),),
+                            ),
+                            title: Text(reviewModel.customerName,style: TextStyle(fontWeight: FontWeight.bold),),
+                            subtitle: Text(reviewModel.feedback,style: TextStyle(),),
+                            trailing: Text(textAlign: TextAlign.justify, reviewModel.rating,style: TextStyle(fontWeight: FontWeight.bold,fontSize: 16.0,),),
+                          ),
+                        );
+                      },
+                    );
+                  }
+
+                  return Container();
+                },
+              ),
+
+
+
+
             ],
           ),
         

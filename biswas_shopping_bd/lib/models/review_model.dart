@@ -22,7 +22,7 @@ class ReviewModel{
   Map<String,dynamic> toMap(){
     return {
       'customerName': customerName,
-      'customarPhone': customerPhone,
+      'customerPhone': customerPhone,
       'customerDeviceToken': customerDeviceToken,
       'customerId': customerId,
       'feedback': feedback,

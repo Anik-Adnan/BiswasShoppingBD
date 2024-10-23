@@ -1,2 +1,2 @@
 # BiswasShoppingBD
-a full ecommerce project
+a full ecommerce project adminPanel with userPanel

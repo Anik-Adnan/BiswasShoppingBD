@@ -30,6 +30,7 @@ class _MainScreenState extends State<MainScreen>{
   void initState() {
     super.initState();
     notificationService.requestNotification();
+    notificationService.getDeviceToken();
   }
 
   @override

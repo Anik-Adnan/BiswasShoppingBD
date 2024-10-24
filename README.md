@@ -46,3 +46,20 @@
 1. **Clone the Repository:**
    ```bash
    git clone 
+
+## Technologies Used
+
+- **Frontend**: 
+  - Flutter for mobile (Android/iOS) and web.
+  - Dart programming language for the frontend logic and UI.
+
+- **Backend**: 
+  - Firebase (Authentication, Firestore for database, Cloud Functions, Firebase Hosting for web).
+  - API integration for product data and payment gateways.
+
+- **State Management**: 
+  - GetX for efficient state management and dependency injection.
+
+- **Payment Integration**: 
+  - Stripe via Firebase Cloud Functions and external API integration.
+

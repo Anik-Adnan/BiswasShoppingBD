@@ -220,6 +220,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                             Get.snackbar(
                               "Product added to the cart",
                               "Please! confrim the order.",
+                              snackPosition: SnackPosition.BOTTOM,
                               colorText: Colors.white,
                               duration: Duration(seconds: 1),
                             );

@@ -3,6 +3,7 @@ import 'package:biswas_shopping_bd/screens/user-panel/all-category-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/all-flashSale-product-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/all-products-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
+import 'package:biswas_shopping_bd/services/notification_service.dart';
 import 'package:biswas_shopping_bd/widgets/all-products-widget.dart';
 import 'package:biswas_shopping_bd/widgets/categories-widget.dart';
 import 'package:biswas_shopping_bd/widgets/flashSale-widget.dart';
@@ -15,8 +16,22 @@ import '/utils/app-constant.dart';
 import '/widgets/drawer-widget.dart';
 import 'package:flutter/material.dart';
 
-class MainScreen extends StatelessWidget{
+class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen>{
+
+  NotificationService notificationService = NotificationService();
+  @override
+  void initState() {
+    super.initState();
+    notificationService.requestNotification();
+    notificationService.getDeviceToken();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,5 +96,6 @@ class MainScreen extends StatelessWidget{
 
     );
   }
+
 
 }

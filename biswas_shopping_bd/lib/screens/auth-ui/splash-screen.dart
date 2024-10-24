@@ -35,9 +35,9 @@ class _SplashScreenState extends State<SplashScreen>{
       if(user != null){
         final GetUserDataController getUserDataController= Get.put(GetUserDataController());
         var userDate =await  getUserDataController.getUserData(user!.uid);
-        if(userDate[0]['isAdmin'] == true){
+        if(userDate.isNotEmpty && userDate[0]['isAdmin'] == true){
           Get.offAll(()=> AdminMainScreen());
-        }else{
+        }else if(userDate.isNotEmpty){
           Get.offAll(()=>MainScreen());
         }
       }else{

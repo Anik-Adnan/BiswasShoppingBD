@@ -2,6 +2,7 @@
 import 'package:biswas_shopping_bd/controllers/get_customer_device_token.dart';
 import 'package:biswas_shopping_bd/controllers/product_price_controller.dart';
 import 'package:biswas_shopping_bd/models/car-model.dart';
+import 'package:biswas_shopping_bd/services/get_server_key.dart';
 import 'package:biswas_shopping_bd/services/place_order_service.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -161,8 +162,12 @@ class CheckOutScreen extends StatelessWidget{
                       "Confirm Order",
                       style: TextStyle(color: AppConstant.apptextColor,fontWeight: FontWeight.bold,fontSize: 16.0),
                     ),
-                    onPressed: () {
+                    onPressed: () async {
                       showCustomBottomSheet();
+
+                      GetServerKey getServerKey = GetServerKey();
+                      String accesstoken = await getServerKey.getServerKeyToken();
+                      print(accesstoken);
                     },
                   ),
                 ),

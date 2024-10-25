@@ -32,16 +32,16 @@ class NotificationService{
   }
 
   // get Token
-Future<String> getDeviceToken() async{
-    NotificationSettings settings = await messaging.requestPermission(
-      alert: true,
-      badge: true,
-      sound: true,
-    );
-    String? token = await messaging.getToken();
-    // print("Device Token : $token");
-    return token!;
+  Future<String> getDeviceToken() async{
+      NotificationSettings settings = await messaging.requestPermission(
+        alert: true,
+        badge: true,
+        sound: true,
+      );
+      String? token = await messaging.getToken();
+      print("Device Token : $token");
+      return token!; // returned token to send messages to users from our custom server
 
-}
+  }
 
 }

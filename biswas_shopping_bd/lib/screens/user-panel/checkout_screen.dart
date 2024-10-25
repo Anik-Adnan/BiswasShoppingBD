@@ -1,7 +1,7 @@
 
 import 'package:biswas_shopping_bd/controllers/get_customer_device_token.dart';
 import 'package:biswas_shopping_bd/controllers/product_price_controller.dart';
-import 'package:biswas_shopping_bd/models/car-model.dart';
+import 'package:biswas_shopping_bd/models/cart-model.dart';
 import 'package:biswas_shopping_bd/services/get_server_key.dart';
 import 'package:biswas_shopping_bd/services/place_order_service.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';

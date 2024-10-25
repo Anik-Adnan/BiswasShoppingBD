@@ -1,6 +1,6 @@
 
 import 'package:biswas_shopping_bd/controllers/rating_controller.dart';
-import 'package:biswas_shopping_bd/models/car-model.dart';
+import 'package:biswas_shopping_bd/models/cart-model.dart';
 import 'package:biswas_shopping_bd/models/product-model.dart';
 import 'package:biswas_shopping_bd/models/review_model.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';

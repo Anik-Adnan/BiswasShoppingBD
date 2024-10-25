@@ -18,9 +18,9 @@ class NotificationService{
     );
 
     if(settings.authorizationStatus == AuthorizationStatus.authorized){
-      print('user granted permission');
+      print('User granted permission');
     }else if( settings.authorizationStatus == AuthorizationStatus.provisional){
-      print('user provisional granted permission');
+      print('User granted provisional permission');
     }else{
       Get.snackbar('Notification permission denied', 'Please allow notification to receive updates.',
       snackPosition: SnackPosition.BOTTOM);

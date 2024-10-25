@@ -22,10 +22,13 @@ class SignInController extends GetxController{
       EasyLoading.dismiss();
       return userCredential;
 
-    }on FirebaseException catch(e){
+    } on FirebaseAuthException catch (e) {
       EasyLoading.dismiss();
-      print("$e");
-      // Get.snackbar("Error", "$e");
+      if (e.code == 'user-not-found') {
+        print('No user found for that email.');
+      } else if (e.code == 'wrong-password') {
+        print('Wrong password provided for that user.');
+      }
     }
   }
 

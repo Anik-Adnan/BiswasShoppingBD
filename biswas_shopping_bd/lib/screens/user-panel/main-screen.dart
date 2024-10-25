@@ -3,6 +3,7 @@ import 'package:biswas_shopping_bd/screens/user-panel/all-category-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/all-flashSale-product-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/all-products-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
+import 'package:biswas_shopping_bd/services/fcm_service.dart';
 import 'package:biswas_shopping_bd/services/notification_service.dart';
 import 'package:biswas_shopping_bd/widgets/all-products-widget.dart';
 import 'package:biswas_shopping_bd/widgets/categories-widget.dart';
@@ -31,6 +32,9 @@ class _MainScreenState extends State<MainScreen>{
     super.initState();
     notificationService.requestNotification();
     notificationService.getDeviceToken();
+    FcmService.firebaseInit();
+    notificationService.firebaseInit(context);
+    notificationService.setupInteractMessage(context);
   }
 
   @override

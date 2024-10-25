@@ -54,6 +54,7 @@ dependencies:
   googleapis_auth: ^1.6.0
   firebase_database: ^10.5.7
   app_settings: ^5.1.1
+  flutter_local_notifications: ^17.2.4
 
 
 dev_dependencies:

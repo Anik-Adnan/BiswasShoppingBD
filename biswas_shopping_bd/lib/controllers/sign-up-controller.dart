@@ -27,6 +27,7 @@ class SignUpController extends GetxController{
       EasyLoading.show(status: "Please wait");
       UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
           email: userEmail, password: userPassword);
+
       // send mail verification
       userCredential.user!.sendEmailVerification();
       
@@ -56,12 +57,23 @@ class SignUpController extends GetxController{
       EasyLoading.dismiss();
       return userCredential;
 
-    }on FirebaseException catch(e){
+    } on FirebaseAuthException catch (e) {
       EasyLoading.dismiss();
-      Get.snackbar("Error", "$e",
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: AppConstant.appSecondaryColor,
-      colorText: AppConstant.apptextColor);
+      if (e.code == 'weak-password') {
+        print('The password provided is too weak.');
+        Get.snackbar("Error", "The password provided is too weak.",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: AppConstant.appSecondaryColor,
+            colorText: AppConstant.apptextColor);
+      } else if (e.code == 'email-already-in-use') {
+        print('The account already exists for that email.');
+        Get.snackbar("Error", "The account already exists for that email.",
+            snackPosition: SnackPosition.BOTTOM,
+            backgroundColor: AppConstant.appSecondaryColor,
+            colorText: AppConstant.apptextColor);
+      }
+    } catch (e) {
+      print(e);
     }
   }
 

@@ -1,6 +1,6 @@
 
 import 'package:biswas_shopping_bd/controllers/product_price_controller.dart';
-import 'package:biswas_shopping_bd/models/car-model.dart';
+import 'package:biswas_shopping_bd/models/cart-model.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/checkout_screen.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';

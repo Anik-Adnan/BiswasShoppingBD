@@ -1,6 +1,7 @@
 
 import 'dart:io';
 
+import 'package:app_settings/app_settings.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/main-screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -117,6 +118,8 @@ class NotificationService{
             handleMessage(context,message);
           }
     });
+
+
   }
   Future<void> showNotification(RemoteMessage message) async {
     AndroidNotificationChannel channel = AndroidNotificationChannel(

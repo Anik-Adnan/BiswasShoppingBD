@@ -46,7 +46,7 @@ class _MainScreenState extends State<MainScreen>{
         title: Text(AppConstant.appName),
         actions:  [
           GestureDetector(
-            onTap: ()=> Get.to(CartScreen()),
+            onTap: ()=> Get.to(()=>CartScreen()),
             child: Padding(
               padding: const EdgeInsets.all(8.0),
                 child: Icon(Icons.shopping_cart,color: Colors.black,)),
@@ -67,7 +67,7 @@ class _MainScreenState extends State<MainScreen>{
               HeadingWidget(
                 headingTitle: "Categories",
                 headingSubTitle: "According to your budget",
-                onTap: ()=> Get.to(AllCategoryScreen()),
+                onTap: ()=> Get.to(()=>AllCategoryScreen()),
                 buttonText: "see more>>",
               ),
               CategoriesWidget(),
@@ -76,7 +76,7 @@ class _MainScreenState extends State<MainScreen>{
                 headingTitle: "Flash Sale",
                 headingSubTitle: "According to your budget",
                 onTap: (){
-                  Get.to(AllFlashSaleProductsScreen());
+                  Get.to(()=> AllFlashSaleProductsScreen());
                 },
                 buttonText: "see more>>",
               ),
@@ -86,7 +86,7 @@ class _MainScreenState extends State<MainScreen>{
                 headingTitle: "All Products",
                 headingSubTitle: "According to your budget",
                 onTap: () {
-                  Get.to(AllProductsScreen());
+                  Get.to(()=>AllProductsScreen());
                 },
                 buttonText: "see more>>",
               ),

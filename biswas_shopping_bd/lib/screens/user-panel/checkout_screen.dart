@@ -165,9 +165,6 @@ class CheckOutScreen extends StatelessWidget{
                     onPressed: () async {
                       showCustomBottomSheet();
 
-                      // GetServerKey getServerKey = GetServerKey();
-                      // String accesstoken = await getServerKey.getServerKeyToken();
-                      // print(accesstoken);
                     },
                   ),
                 ),

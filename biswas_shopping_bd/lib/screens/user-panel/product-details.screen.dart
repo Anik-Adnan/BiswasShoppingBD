@@ -4,6 +4,7 @@ import 'package:biswas_shopping_bd/models/cart-model.dart';
 import 'package:biswas_shopping_bd/models/product-model.dart';
 import 'package:biswas_shopping_bd/models/review_model.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
+import 'package:biswas_shopping_bd/services/get_server_key.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -224,6 +225,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                               colorText: Colors.white,
                               duration: Duration(seconds: 1),
                             );
+
+                            // get server key
+                            GetServerKey getServerKey = GetServerKey();
+                            String accesstoken = await getServerKey.getServerKeyToken();
+                            print("Server Access token: ${accesstoken}");
                           },
                         ),
                       ),

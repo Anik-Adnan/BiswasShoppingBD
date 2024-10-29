@@ -3,12 +3,15 @@ import 'package:biswas_shopping_bd/controllers/get_customer_device_token.dart';
 import 'package:biswas_shopping_bd/controllers/product_price_controller.dart';
 import 'package:biswas_shopping_bd/models/cart-model.dart';
 import 'package:biswas_shopping_bd/services/get_server_key.dart';
+import 'package:biswas_shopping_bd/services/notification_service.dart';
 import 'package:biswas_shopping_bd/services/place_order_service.dart';
+import 'package:biswas_shopping_bd/services/send_notification_service.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_swipe_action_cell/flutter_swipe_action_cell.dart';
 import 'package:get/get.dart';
 class CheckOutScreen extends StatelessWidget{
@@ -164,6 +167,16 @@ class CheckOutScreen extends StatelessWidget{
                     ),
                     onPressed: () async {
                       showCustomBottomSheet();
+                      EasyLoading.show();
+                      await SendNotificationService.sendNotificationUsingApi(
+                          token: NotificationService().getDeviceToken().toString(),
+                          title: "Order Created Successfully",
+                          body: "Product Name: N/A",
+                          data: {
+                            'screen': 'order',
+                          });
+                      EasyLoading.dismiss();
+
 
                     },
                   ),

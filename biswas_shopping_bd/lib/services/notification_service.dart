@@ -2,7 +2,9 @@
 import 'dart:io';
 
 import 'package:app_settings/app_settings.dart';
+import 'package:biswas_shopping_bd/screens/user-panel/all_order_screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/main-screen.dart';
+import 'package:biswas_shopping_bd/screens/user-panel/notification_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -177,12 +179,22 @@ class NotificationService{
     print(
         "Navigating to appointments screen. Hit here to handle the message. Message data: ${message
             .data}");
+    if(message.data['screen'] == 'order'){
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => AllOrderScreen(),
+        ),
+      );
+    }else{
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => NotificationScreen(),
+        ),
+      );
+    }
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => MainScreen(),
-      ),
-    );
+
   }
 }

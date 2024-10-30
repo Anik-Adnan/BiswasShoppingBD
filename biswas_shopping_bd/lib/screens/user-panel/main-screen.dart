@@ -5,9 +5,11 @@ import 'package:biswas_shopping_bd/screens/user-panel/all-products-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
 import 'package:biswas_shopping_bd/services/fcm_service.dart';
 import 'package:biswas_shopping_bd/services/notification_service.dart';
+import 'package:biswas_shopping_bd/services/send_notification_service.dart';
 import 'package:biswas_shopping_bd/widgets/all-products-widget.dart';
 import 'package:biswas_shopping_bd/widgets/categories-widget.dart';
 import 'package:biswas_shopping_bd/widgets/flashSale-widget.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 import '/widgets/banner-widget.dart';
 import '/widgets/heading-widget.dart';
@@ -46,7 +48,19 @@ class _MainScreenState extends State<MainScreen>{
         title: Text(AppConstant.appName),
         actions:  [
           GestureDetector(
-            onTap: ()=> Get.to(()=>CartScreen()),
+            onTap: () async {
+              Get.to(()=>CartScreen());
+            EasyLoading.show();
+            await SendNotificationService.sendNotificationUsingApi(
+                token: "eyfrQgJwSQOgn3z5xJExYz:APA91bGJgd1EIht30yToU-DsBFap4wqlb_av9OLrkudntz2QiLiyyF3gDrsmMkzf0ZiJIOf4nlXBMwc9ISjZTkzuPU_MTs57Ry9OBncSPMN1HCZbrpWPFofjx1620N7SQXnPIhSZaz0o",
+                title: "Order Created Successfully",
+                body: "Product Name: N/A",
+                data: {
+                  'screen': 'order',
+                });
+              EasyLoading.dismiss();
+
+            },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
                 child: Icon(Icons.shopping_cart,color: Colors.black,)),
@@ -67,7 +81,7 @@ class _MainScreenState extends State<MainScreen>{
               HeadingWidget(
                 headingTitle: "Categories",
                 headingSubTitle: "According to your budget",
-                onTap: ()=> Get.to(()=>AllCategoryScreen()),
+                onTap: ()=> Get.to(AllCategoryScreen()),
                 buttonText: "see more>>",
               ),
               CategoriesWidget(),
@@ -75,9 +89,7 @@ class _MainScreenState extends State<MainScreen>{
               HeadingWidget(
                 headingTitle: "Flash Sale",
                 headingSubTitle: "According to your budget",
-                onTap: (){
-                  Get.to(()=> AllFlashSaleProductsScreen());
-                },
+                onTap: ()=> Get.to(AllFlashSaleProductsScreen()),
                 buttonText: "see more>>",
               ),
               FlashSaleWidget(),
@@ -85,9 +97,7 @@ class _MainScreenState extends State<MainScreen>{
               HeadingWidget(
                 headingTitle: "All Products",
                 headingSubTitle: "According to your budget",
-                onTap: () {
-                  Get.to(()=>AllProductsScreen());
-                },
+                onTap: () =>Get.to(AllProductsScreen()),
                 buttonText: "see more>>",
               ),
               AllProductsWidget(),

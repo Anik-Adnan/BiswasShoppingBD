@@ -12,10 +12,11 @@ class SendNotificationService{
     required Map<String,dynamic>? data,
   }) async{
     String serverKey = await GetServerKey().getServerKeyToken();
-    String url = 'https://fcm.googleapis.com/v1/projects/biswasshoppingbd-5c83b/messages:send';
+    String url = "https://fcm.googleapis.com/v1/projects/biswasshoppingbd-5c83b/messages:send";
 
-    var headers = <String,String> {
-      'Content-Type':'application/json',
+    print("server key : ${serverKey}");
+    var headers = <String, String>{
+      'Content-Type': 'application/json',
       'Authorization': 'Bearer $serverKey',
     };
 
@@ -26,21 +27,22 @@ class SendNotificationService{
           "body": body,
           "title": title,
         },
-        "data": data
+        "data": data,
       }
     };
 
     // hit api
-    final http.Response respoonce = await http.post(
+    final http.Response response = await http.post(
       Uri.parse(url),
       headers: headers,
       body: jsonEncode(message),
     );
 
-    if(respoonce.statusCode == 200){
+    if(response.statusCode == 200){
       print("Notification Send Successfully!");
     }else{
-      print("Notification is not Send!");
+      print("Failed to send notification. Status: ${response.statusCode}");
+      print("Response body: ${response.body}");
     }
 
   }

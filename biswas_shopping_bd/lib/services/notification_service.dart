@@ -1,9 +1,7 @@
 
 import 'dart:io';
 
-import 'package:app_settings/app_settings.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/all_order_screen.dart';
-import 'package:biswas_shopping_bd/screens/user-panel/main-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/notification_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
@@ -52,7 +50,8 @@ class NotificationService{
 
   // get FCM Token
   Future<String> getDeviceToken() async{
-      NotificationSettings settings = await messaging.requestPermission(
+      // NotificationSettings settings =
+      await messaging.requestPermission(
         alert: true,
         badge: true,
         sound: true,

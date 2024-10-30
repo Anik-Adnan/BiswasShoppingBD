@@ -5,6 +5,8 @@ import 'package:biswas_shopping_bd/models/product-model.dart';
 import 'package:biswas_shopping_bd/models/review_model.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
 import 'package:biswas_shopping_bd/services/get_server_key.dart';
+import 'package:biswas_shopping_bd/services/notification_service.dart';
+import 'package:biswas_shopping_bd/services/send_notification_service.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -217,7 +219,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                           onPressed: () async {
 
                             await checkProductExistence(uId: user!.uid);
-
                             Get.snackbar(
                               "Product added to the cart",
                               "Please! confrim the order.",
@@ -225,11 +226,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen>{
                               colorText: Colors.white,
                               duration: Duration(seconds: 1),
                             );
-
-                            // get server key
-                            GetServerKey getServerKey = GetServerKey();
-                            String accesstoken = await getServerKey.getServerKeyToken();
-                            print("Server Access token: ${accesstoken}");
+                            //
+                            // // get server key
+                            // GetServerKey getServerKey = GetServerKey();
+                            // String accesstoken = await getServerKey.getServerKeyToken();
+                            // print("Server Access token: ${accesstoken}");
                           },
                         ),
                       ),

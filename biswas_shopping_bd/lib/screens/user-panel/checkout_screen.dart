@@ -167,16 +167,6 @@ class CheckOutScreen extends StatelessWidget{
                     ),
                     onPressed: () async {
                       showCustomBottomSheet();
-                      EasyLoading.show();
-                      await SendNotificationService.sendNotificationUsingApi(
-                          token: NotificationService().getDeviceToken().toString(),
-                          title: "Order Created Successfully",
-                          body: "Product Name: N/A",
-                          data: {
-                            'screen': 'order',
-                          });
-                      EasyLoading.dismiss();
-
 
                     },
                   ),

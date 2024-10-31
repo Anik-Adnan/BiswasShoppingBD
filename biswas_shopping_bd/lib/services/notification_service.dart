@@ -178,22 +178,12 @@ class NotificationService{
     print(
         "Navigating to appointments screen. Hit here to handle the message. Message data: ${message
             .data}");
-    if(message.data['screen'] == 'order'){
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => AllOrderScreen(),
-        ),
-      );
-    }else{
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => NotificationScreen(),
-        ),
-      );
-    }
 
-
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => NotificationScreen(message: message),
+      ),
+    );
   }
 }

@@ -2,6 +2,7 @@
 import 'package:biswas_shopping_bd/models/order-model.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/main-screen.dart';
 import 'package:biswas_shopping_bd/services/generate_order_id_service.dart';
+import 'package:biswas_shopping_bd/services/send_notification_service.dart';
 import 'package:biswas_shopping_bd/utils/app-constant.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -90,20 +91,49 @@ void placeOrder({
           });
         }
 
-
-        print("Order Confirmed");
-        Get.snackbar(
-          "Order Confirmed",
-          "Thank you for your order!",
-          colorText: Colors.white,
-          duration: Duration(seconds: 5),
+        // save notification
+        await FirebaseFirestore.instance
+            .collection('notifications')
+            .doc(user.uid)
+            .collection('notifications')
+            .doc()
+            .set(
+          {
+            'title': "Order Successfully placed ${cartModel.productName}",
+            'body': cartModel.productDescription,
+            'isSeen': false,
+            'createdAt': DateTime.now(),
+            'image': cartModel.productImages,
+            'fullPrice': cartModel.fullPrice,
+            'salePrice': cartModel.salePrice,
+            'isSale': cartModel.isSale,
+            'productId': cartModel.productId,
+          },
         );
-
-        EasyLoading.dismiss();
-        Get.offAll(() => MainScreen());
-
-
       }
+
+      //sent notification
+      await SendNotificationService.sendNotificationUsingApi(
+        token:
+        "eUn8RwbTSwK3bv9j3rKQu8:APA91bHYEje64oVDk6dsLNI77jELGjmh59RB_yPNmlZXzqMoJB76HF7l6qMCPFSez5SqsDKoIdt6k8RDzDRt2IVTchgIigmRD_QmJIxZ1MkSscXknbOmPsZkYsUGToaFZQvvb1c-JFec",
+        title: "Order Successfully placed",
+        body: "notification body",
+        data: {
+          "screen": "notification",
+        },
+      );
+
+
+      print("Order Confirmed");
+      Get.snackbar(
+        "Order Confirmed",
+        "Thank you for your order!",
+        colorText: Colors.white,
+        duration: Duration(seconds: 5),
+      );
+
+      EasyLoading.dismiss();
+      Get.offAll(() => MainScreen());
     }catch(e){
       print("Error $e");
     }

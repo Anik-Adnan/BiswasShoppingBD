@@ -7,8 +7,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class NotificationScreen extends StatefulWidget{
-  final RemoteMessage message;
-  const NotificationScreen({super.key,required this.message});
+  final RemoteMessage? message;
+  const NotificationScreen({super.key, this.message});
 
   @override
   State<NotificationScreen> createState() => _NotificationScreenState();

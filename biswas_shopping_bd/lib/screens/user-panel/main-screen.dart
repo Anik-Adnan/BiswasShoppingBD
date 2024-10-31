@@ -4,6 +4,7 @@ import 'package:biswas_shopping_bd/screens/user-panel/all-flashSale-product-scre
 import 'package:biswas_shopping_bd/screens/user-panel/all-products-screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/cart_screen.dart';
 import 'package:biswas_shopping_bd/screens/user-panel/notification_screen.dart';
+import 'package:biswas_shopping_bd/services/get_server_key.dart';
 import 'package:biswas_shopping_bd/services/notification_service.dart';
 import 'package:biswas_shopping_bd/services/send_notification_service.dart';
 import 'package:biswas_shopping_bd/widgets/all-products-widget.dart';
@@ -29,6 +30,8 @@ class MainScreen extends StatefulWidget {
 class _MainScreenState extends State<MainScreen>{
 
   NotificationService notificationService = NotificationService();
+  final GetServerKey _getServerKey = GetServerKey();
+
   @override
   void initState() {
     super.initState();
@@ -48,9 +51,7 @@ class _MainScreenState extends State<MainScreen>{
         title: Text(AppConstant.appName),
         actions:  [
           GestureDetector(
-            onTap: ()=>{
-                Get.to(NotificationScreen(message: ,)),
-            },
+            onTap: ()=> Get.to(()=> NotificationScreen()),
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(Icons.notifications,color: Colors.black,)),
@@ -58,15 +59,15 @@ class _MainScreenState extends State<MainScreen>{
           GestureDetector(
             onTap: () async {
               Get.to(CartScreen());
-            EasyLoading.show();
-            await SendNotificationService.sendNotificationUsingApi(
-              token: await notificationService.getDeviceToken(),
-                title: "Order Created Successfully",
-                body: "Product Name: N/A",
-                data: {
-                  'screen': 'order',
-                });
-              EasyLoading.dismiss();
+            // EasyLoading.show();
+            // await SendNotificationService.sendNotificationUsingApi(
+            //   token: await notificationService.getDeviceToken(),
+            //     title: "Order Created Successfully",
+            //     body: "Product Name: N/A",
+            //     data: {
+            //       'screen': 'order',
+            //     });
+            //   EasyLoading.dismiss();
 
             },
             child: Padding(

@@ -51,7 +51,18 @@ class _MainScreenState extends State<MainScreen>{
         title: Text(AppConstant.appName),
         actions:  [
           GestureDetector(
-            onTap: ()=> Get.to(()=> NotificationScreen()),
+            onTap: ()=> {
+              Get.to(()=> NotificationScreen()),
+              // EasyLoading.show();
+              // await SendNotificationService.sendNotificationUsingApi(
+              //   token: await notificationService.getDeviceToken(),
+              //     title: "Order Created Successfully",
+              //     body: "Product Name: N/A",
+              //     data: {
+              //       'screen': 'order',
+              //     });
+              //   EasyLoading.dismiss();
+            },
             child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Icon(Icons.notifications,color: Colors.black,)),
@@ -59,16 +70,6 @@ class _MainScreenState extends State<MainScreen>{
           GestureDetector(
             onTap: () async {
               Get.to(CartScreen());
-            // EasyLoading.show();
-            // await SendNotificationService.sendNotificationUsingApi(
-            //   token: await notificationService.getDeviceToken(),
-            //     title: "Order Created Successfully",
-            //     body: "Product Name: N/A",
-            //     data: {
-            //       'screen': 'order',
-            //     });
-            //   EasyLoading.dismiss();
-
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),

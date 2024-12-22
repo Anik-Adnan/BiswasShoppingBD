@@ -33,20 +33,6 @@
 - **Push Notifications**  
   - Real-time push notifications for order updates, new product arrivals, and offers via Firebase Cloud Messaging.
 
-## Installation
-
-### Prerequisites
-
-1. **Flutter SDK**: [Install Flutter](https://flutter.dev/docs/get-started/install)
-2. **Firebase Account**: Create a Firebase project and enable the necessary services (Authentication, Firestore, Cloud Functions).
-3. **Dart SDK** (included with Flutter)
-
-### Setup
-
-1. **Clone the Repository:**
-   ```bash
-   git clone 
-
 ## Technologies Used
 
 - **Frontend**: 
